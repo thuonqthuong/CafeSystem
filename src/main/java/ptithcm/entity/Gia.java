@@ -2,6 +2,7 @@ package ptithcm.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,8 @@ public class Gia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	@NotBlank(message = "Cannot be blank")
-	private Integer Id;
+	@Column(name = "Id")
+	private Integer id;
 	
 	@ManyToOne
 	@JoinColumn(name="MaSanPham")
@@ -28,18 +30,12 @@ public class Gia {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 //	@NotBlank(message = "Cannot be blank")
-	private Date ThoiGian;
+	@Column(name = "ThoiGian")
+	private Date thoigian;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private Double Gia;
-
-	public Integer getId() {
-		return Id;
-	}
-
-	public void setId(Integer id) {
-		Id = id;
-	}
+	@Column(name = "Gia")
+	private Double gia;
 
 	public SanPham getGia_sanpham() {
 		return gia_sanpham;
@@ -49,22 +45,28 @@ public class Gia {
 		this.gia_sanpham = gia_sanpham;
 	}
 
-	public Date getThoiGian() {
-		return ThoiGian;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setThoiGian(Date thoiGian) {
-		ThoiGian = thoiGian;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Date getThoigian() {
+		return thoigian;
+	}
+
+	public void setThoigian(Date thoigian) {
+		this.thoigian = thoigian;
 	}
 
 	public Double getGia() {
-		return Gia;
+		return gia;
 	}
 
 	public void setGia(Double gia) {
-		Gia = gia;
+		this.gia = gia;
 	}
 
-	
-	
 }

@@ -17,7 +17,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Tables</title>
+<title>quản lý tài khoản</title>
 
 <!-- Custom fonts for this template -->
 <link
@@ -263,15 +263,15 @@
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
 					<div class="card-header">
 						<label class="font-weight-bold"
-							style="font-size: 20px; color: #800000">MANAGE ACCOUNTS</label>
+							style="font-size: 20px; color: #800000">QUẢN LÝ TÀI KHOẢN</label>
 					</div>
 					<div class="card-header">
 						<form:form class="row g-3" modelAttribute="tk"
 							action="/CoffeeHouse/manager/account/edit.htm" rel="stylesheet">
 							<div class="col-md-4">
-								<label class="font-weight-bold">Username</label>
+								<label class="font-weight-bold">Tên Đăng Nhập</label>
 								<form:input path="username" type="text" class="form-control"
-									id="exampleFormControlInput1" placeholder="Type Username" />
+									id="exampleFormControlInput1"/>
 								<p style="color: red; font-style: oblique">
 									<form:errors path="username" />
 								</p>
@@ -286,16 +286,16 @@
 								</p>
 							</div> --%>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Authority</label>
-								<form:select path="quyen.tenQuyen" items="${aus}"
-									itemValue="tenQuyen" itemLabel="tenQuyen" class="form-control"
+								<label class="font-weight-bold">Quyền Hạn</label>
+								<form:select path="quyen.maquyen" items="${aus}"
+									itemValue="maquyen" itemLabel="tenquyen" class="form-control"
 									aria-label=".form-select-lg example">
 								</form:select>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Password</label>
+								<label class="font-weight-bold">Mật Khẩu</label>
 								<form:input path="password" type="text" class="form-control"
-									id="exampleFormControlInput1" placeholder="Type Password" />
+									id="exampleFormControlInput1" />
 								<p style="color: red; font-style: oblique">
 									<form:errors path="password" />
 								</p>
@@ -303,7 +303,7 @@
 							<div class='parent' class="col-md-4">
 								<hr>
 								<div class='child float-left-child' style="margin-left: 2.5em">
-									<button name="${btnStatus}" class="btn btn-danger">Save</button>
+									<button name="${btnStatus}" class="btn btn-danger">Lưu</button>
 									<p5 class="text-success">${message1}</p5>
 									<p5 class="text-danger">${message0}</p5>
 								</div>
@@ -322,27 +322,27 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Username</th>
-											<th>Authority</th>
-											<th>Password</th>
-											<th>Edit</th>
-											<th>Delete</th>
+											<th>Tên Đăng Nhập</th>
+											<th>Quyền Hạn</th>
+											<th>Mật Khẩu</th>
+											<th>Xóa</th>
+											<th>Sửa</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Username</th>
-											<th>Authority</th>
-											<th>Password</th>
-											<th>Edit</th>
-											<th>Delete</th>
+											<th>Tên Đăng Nhập</th>
+											<th>Quyền Hạn</th>
+											<th>Mật Khẩu</th>
+											<th>Xóa</th>
+											<th>Sửa</th>
 										</tr>
 									</tfoot>
 									<tbody>
 										<c:forEach var="tk" items="${tks}">
 											<tr>
 												<td>${tk.username}</td>
-												<td>${tk.quyen.getTenQuyen()}</td>
+												<td>${tk.quyen.getTenquyen()}</td>
 												<td>${tk.password}</td>
 												<td><a
 													href="/CoffeeHouse/manager/account/edit/${tk.username}.htm?linkEdit"

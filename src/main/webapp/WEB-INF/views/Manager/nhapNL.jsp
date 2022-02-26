@@ -17,7 +17,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>quản lý nguyên liệu</title>
+<title>nhập nguyên liệu</title>
 
 <!-- Custom fonts for this template -->
 <link
@@ -44,7 +44,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@ include file="/WEB-INF/common/Manager/Sidebar.jsp" %>
+		<%@ include file="/WEB-INF/common/Manager/Sidebar.jsp"%>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -263,69 +263,36 @@
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
 					<div class="card-header">
 						<label class="font-weight-bold"
-							style="font-size: 20px; color: #800000">QUẢN LÝ NGUYÊN LIỆU</label>
+							style="font-size: 20px; color: #800000">NHẬP NGUYÊN LIỆU</label>
 					</div>
 					<div class="card-header">
-						<form:form class="row g-3" modelAttribute="nl"
-							action="/CoffeeHouse/manager/material/edit.htm" rel="stylesheet">
+						<form:form class="row g-3" modelAttribute="pn"
+							action="/CoffeeHouse/manager/material/import.htm"
+							rel="stylesheet">
 							<div class="col-md-4">
-								<label class="font-weight-bold">Mã Nguyên Liệu</label>
-								<form:input path="manguyenlieu" type="text" class="form-control"
-									id="exampleFormControlInput1"/>
+								<label class="font-weight-bold">Nhân Viên</label>
+								<form:input path="phieunhap_nhanvien.manv" items="${nhanvien}"
+									value="phieunhap_nhanvien.manv"	label="phieunhap_nhanvien.ten"
+									class="form-control" />
 								<p style="color: red; font-style: oblique">
-									<form:errors path="manguyenlieu" />
+									<form:errors path="phieunhap_nhanvien.ten" /> 
 								</p>
 							</div>
 							<%-- <div class="col-md-4">
-								<label class="font-weight-bold">Unit</label>
-								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="nguyenlieu_donvi" type="text"
-									class="form-control" id="exampleFormControlInput1"
-									placeholder="Type Unit" />
-								<p style="color: red; font-style: oblique">
-									<form:errors path="nguyenlieu_donvi" />
-								</p>
-							</div> --%>
-							<div class="col-md-4">
-								<label class="font-weight-bold">Đơn Vị</label>
-								<form:select path="nguyenlieu_donvi.madonvi" items="${units}"
-									itemValue="madonvi" itemLabel="tendonvi" class="form-control"
+								<label class="font-weight-bold">Chọn Chi Nhánh</label>
+								<form:select path="phieunhap_diadiem" items="${cnselect}"
+									itemValue="phieunhap_diadiem.maDiaDiem" itemLabel="phieunhap_diadiem.viTri" class="form-control"
 									aria-label=".form-select-lg example">
 								</form:select>
-							</div>
-							<div class="col-md-4">
-								<label class="font-weight-bold">Tên Nguyên Liệu</label>
-								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="tennguyenlieu" type="text"
-									class="form-control" id="exampleFormControlInput1"/>
-								<p style="color: red; font-style: oblique">
-									<form:errors path="tennguyenlieu" />
-								</p>
-							</div>
-							<div class="col-md-4">
-								<label class="font-weight-bold">Số Lượng</label>
-								<form:input path="soluong" type="text" class="form-control"
-									id="exampleFormControlInput1"/>
-								<p style="color: red; font-style: oblique">
-									<form:errors path="soluong" />
-								</p>
-							</div>
-							<div class="col-md-4">
-								<label class="font-weight-bold">Ghi Chú</label>
-								<form:input path="ghichu" type="text" class="form-control"
-									id="exampleFormControlInput1"/>
-								<p style="color: red; font-style: oblique">
-									<form:errors path="ghichu" />
-								</p>
-							</div>
+							</div> --%>
 
-							<div class='parent' class="col-md-4">
-								<hr>
-								<div class='child float-left-child' style="margin-left: 2.5em">
-									<button name="${btnStatus}" class="btn btn-danger">Lưu</button>
-									<p5 class="text-success">${message1}</p5>
-									<p5 class="text-danger">${message0}</p5>
-								</div>
+							<div class="col-md-4">
+								<label class="font-weight-bold">Ngày Giờ</label>
+								<form:input path="ngaygio" type="datetime-local"
+									class="form-control" />
+								<p style="color: red; font-style: oblique">
+									<form:errors path="ngaygio" />
+								</p>
 							</div>
 							<div class="form-inline col-5">
 								<hr>
@@ -341,43 +308,29 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Mã Nguyên Liệu</th>
-											<th>Đơn Vị</th>
-											<th>Tên Nguyên Liệu</th>
-											<th>Tồn Kho</th>
-											<th>Ghi Chú</th>
-											<th>Sửa</th>
-											<th>Xóa</th>
+											<th>Product ID</th>
+											<th>Recipe</th>
+											<th>Product Name</th>
+											<th>Note</th>
+											<th>Edit</th>
+											<th>Delete</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Mã Nguyên Liệu</th>
-											<th>Đơn Vị</th>
-											<th>Tên Nguyên Liệu</th>
-											<th>Tồn Kho</th>
-											<th>Ghi Chú</th>
-											<th>Sửa</th>
-											<th>Xóa</th>
+											<th>Recipe</th>
+											<th>Product Name</th>
+											<th>Note</th>
+											<th>Edit</th>
+											<th>Delete</th>
 										</tr>
 									</tfoot>
 									<tbody>
-										<c:forEach var="nl" items="${nls}">
+										<c:forEach var="pn" items="${pns}">
 											<tr>
-												<td>${nl.manguyenlieu}</td>
-												<td>${nl.nguyenlieu_donvi.getMadonvi()}</td>
-												<td>${nl.tennguyenlieu}</td>
-												<td>${nl.soluong}</td>
-												<td>${nl.ghichu}</td>
-												<td><a
-													href="/CoffeeHouse/manager/material/edit/${nl.manguyenlieu}.htm?linkEdit"
-													rel="stylesheet"><img width="31"
-														height="31" src="<c:url value='/resources/img/edit.png'/>" /></a></td>
-												<td><a name="btnDelete"
-													href="/CoffeeHouse/manager/material/edit/${nl.manguyenlieu}.htm?linkDelete"
-													rel="stylesheet" role="button"><img width="31"
-														height="31"
-														src="<c:url value='/resources/img/delete.png'/>" /></a>
+												<td>${pn.phieunhap_nhanvien.ten}</td>
+												<td>${pn.phieunhap_diadiem.vitri}</td>
+												<td>${pn.ngaygio}</td>
 											</tr>
 										</c:forEach>
 									</tbody>

@@ -17,7 +17,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Tables</title>
+<title>quản lý sản phẩm</title>
 
 <!-- Custom fonts for this template -->
 <link
@@ -263,50 +263,50 @@
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
 					<div class="card-header">
 						<label class="font-weight-bold"
-							style="font-size: 20px; color: #800000">MANAGE PRODUCTS</label>
+							style="font-size: 20px; color: #800000">QUẢN LÝ SẢN PHẨM</label>
 					</div>
 					<div class="card-header">
 						<form:form class="row g-3" modelAttribute="sp"
 							action="/CoffeeHouse/manager/product/edit.htm" rel="stylesheet">
 							<div class="col-md-4">
-								<label class="font-weight-bold">Product ID</label>
-								<form:input path="maSanPham" type="text" class="form-control"
-									id="exampleFormControlInput1" placeholder="Type Product ID" />
+								<label class="font-weight-bold">Mã Sản Phẩm</label>
+								<form:input path="masanpham" type="text" class="form-control"
+									id="exampleFormControlInput1"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="maSanPham" />
+									<form:errors path="masanpham" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Recipe</label>
+								<label class="font-weight-bold">Công Thức</label>
 								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="congThuc" type="text" class="form-control"
-									id="exampleFormControlInput1" placeholder="Type Recipe" />
+								<form:input path="congthuc" type="text" class="form-control"
+									id="exampleFormControlInput1"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="congThuc" />
+									<form:errors path="congthuc" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Product Name</label>
+								<label class="font-weight-bold">Tên Sản Phẩm</label>
 								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="tenSanPham" type="text" class="form-control"
-									id="exampleFormControlInput1" placeholder="Type Product Name" />
+								<form:input path="tensanpham" type="text" class="form-control"
+									id="exampleFormControlInput1"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="tenSanPham" />
+									<form:errors path="tensanpham" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Note</label>
-								<form:input path="ghiChu" type="text" class="form-control"
-									id="exampleFormControlInput1" placeholder="Type Note" />
+								<label class="font-weight-bold">Ghi Chú</label>
+								<form:input path="ghichu" type="text" class="form-control"
+									id="exampleFormControlInput1"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="ghiChu" />
+									<form:errors path="ghichu" />
 								</p>
 							</div>
 
 							<div class='parent' class="col-md-4">
 								<hr>
 								<div class='child float-left-child' style="margin-left: 2.5em">
-									<button name="${btnStatus}" class="btn btn-danger">Save</button>
+									<button name="${btnStatus}" class="btn btn-danger">Lưu</button>
 									<p5 class="text-success">${message1}</p5>
 									<p5 class="text-danger">${message0}</p5>
 								</div>
@@ -325,37 +325,37 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Product ID</th>
-											<th>Recipe</th>
-											<th>Product Name</th>
-											<th>Note</th>
-											<th>Edit</th>
-											<th>Delete</th>
+											<th>Mã Sản Phẩm</th>
+											<th>Công Thức</th>
+											<th>Tên Sản Phẩm</th>
+											<th>Ghi Chú</th>
+											<th>Sửa</th>
+											<th>Xóa</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Product ID</th>
-											<th>Recipe</th>
-											<th>Product Name</th>
-											<th>Note</th>
-											<th>Edit</th>
-											<th>Delete</th>
+											<th>Mã Sản Phẩm</th>
+											<th>Công Thức</th>
+											<th>Tên Sản Phẩm</th>
+											<th>Ghi Chú</th>
+											<th>Sửa</th>
+											<th>Xóa</th>
 										</tr>
 									</tfoot>
 									<tbody>
 										<c:forEach var="sp" items="${sps}">
 											<tr>
-												<td>${sp.maSanPham}</td>
-												<td>${sp.congThuc}</td>
-												<td>${sp.tenSanPham}</td>
-												<td>${sp.ghiChu}</td>
+												<td>${sp.masanpham}</td>
+												<td>${sp.congthuc}</td>
+												<td>${sp.tensanpham}</td>
+												<td>${sp.ghichu}</td>
 												<td><a
-													href="/CoffeeHouse/manager/product/edit/${sp.maSanPham}.htm?linkEdit"
+													href="/CoffeeHouse/manager/product/edit/${sp.masanpham}.htm?linkEdit"
 													rel="stylesheet"><img width="31"
 														height="31" src="<c:url value='/resources/img/edit.png'/>" /></a></td>
 												<td><a name="btnDelete"
-													href="/CoffeeHouse/manager/product/edit/${sp.maSanPham}.htm?linkDelete"
+													href="/CoffeeHouse/manager/product/edit/${sp.masanpham}.htm?linkDelete"
 													rel="stylesheet" role="button"><img width="31"
 														height="31"
 														src="<c:url value='/resources/img/delete.png'/>" /></a>

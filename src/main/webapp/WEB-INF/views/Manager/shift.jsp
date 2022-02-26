@@ -9,7 +9,69 @@
 <html lang="en">
 <c:set var="root" value="${pageContext.servletContext.contextPath}" />
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/*the container must be positioned relative:*/
+.custom-select {
+	position: relative;
+	font-family: Arial;
+}
 
+.custom-select select {
+	display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+	background-color: DodgerBlue;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+	position: absolute;
+	content: "";
+	top: 14px;
+	right: 10px;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+	border-color: transparent transparent #fff transparent;
+	top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div, .select-selected {
+	color: #ffffff;
+	padding: 8px 16px;
+	border: 1px solid transparent;
+	border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+	cursor: pointer;
+	user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+	position: absolute;
+	background-color: DodgerBlue;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+	display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+</style>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -17,7 +79,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>quản lý nguyên liệu</title>
+<title>phân công ca làm việc</title>
 
 <!-- Custom fonts for this template -->
 <link
@@ -44,7 +106,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@ include file="/WEB-INF/common/Manager/Sidebar.jsp" %>
+		<%@ include file="/WEB-INF/common/Manager/Sidebar.jsp"%>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -263,66 +325,68 @@
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
 					<div class="card-header">
 						<label class="font-weight-bold"
-							style="font-size: 20px; color: #800000">QUẢN LÝ NGUYÊN LIỆU</label>
+							style="font-size: 20px; color: #800000">PHÂN CÔNG CA LÀM VIỆC CHO NHÂN VIÊN</label>
 					</div>
 					<div class="card-header">
-						<form:form class="row g-3" modelAttribute="nl"
-							action="/CoffeeHouse/manager/material/edit.htm" rel="stylesheet">
+						<form:form method="POST"
+							action="${root}/manager/employee/edit.htm" modelAttribute="shift"
+							class="row g-3" rel="stylesheet">
 							<div class="col-md-4">
-								<label class="font-weight-bold">Mã Nguyên Liệu</label>
-								<form:input path="manguyenlieu" type="text" class="form-control"
-									id="exampleFormControlInput1"/>
+								<label class="font-weight-bold">Mã Nhân Viên</label>
+								<form:input path="maNV" type="text" class="form-control" />
 								<p style="color: red; font-style: oblique">
-									<form:errors path="manguyenlieu" />
+									<form:errors path="maNV" />
 								</p>
 							</div>
-							<%-- <div class="col-md-4">
-								<label class="font-weight-bold">Unit</label>
-								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="nguyenlieu_donvi" type="text"
-									class="form-control" id="exampleFormControlInput1"
-									placeholder="Type Unit" />
-								<p style="color: red; font-style: oblique">
-									<form:errors path="nguyenlieu_donvi" />
-								</p>
-							</div> --%>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Đơn Vị</label>
-								<form:select path="nguyenlieu_donvi.madonvi" items="${units}"
-									itemValue="madonvi" itemLabel="tendonvi" class="form-control"
+								<label class="font-weight-bold">Tên Nhân Viên</label>
+								<form:select path="taikhoan.username" items="${accounts}"
+									itemValue="username" itemLabel="username" class="form-control"
 									aria-label=".form-select-lg example">
 								</form:select>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Tên Nguyên Liệu</label>
-								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="tennguyenlieu" type="text"
-									class="form-control" id="exampleFormControlInput1"/>
+								<label class="font-weight-bold">Ngày</label>
+								<form:input path="ho" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="tennguyenlieu" />
+									<form:errors path="ho" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Số Lượng</label>
-								<form:input path="soluong" type="text" class="form-control"
-									id="exampleFormControlInput1"/>
+								<label class="font-weight-bold">Địa Điểm</label>
+								<form:input path="ten" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="soluong" />
+									<form:errors path="ten" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Ghi Chú</label>
-								<form:input path="ghichu" type="text" class="form-control"
-									id="exampleFormControlInput1"/>
+								<label class="font-weight-bold">Giờ Bắt Đầu Ca</label>
+								<form:input path="ngaySinh" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="ghichu" />
+									<form:errors path="ngaySinh" />
 								</p>
 							</div>
-
+							<div class="col-md-4">
+								<label class="font-weight-bold">Giờ Kết Thúc Ca</label>
+								<form:input path="diaChi" type="text" class="form-control"/>
+								<p style="color: red; font-style: oblique">
+									<form:errors path="diaChi" />
+								</p>
+							</div>
+							<div class="col-md-4">
+								<label class="font-weight-bold">Giới Tính</label>
+								<form:input path="gioiTinh" type="text" class="form-control"/>
+								<p style="color: red; font-style: oblique">
+									<form:errors path="gioiTinh" />
+								</p>
+							</div>
 							<div class='parent' class="col-md-4">
 								<hr>
 								<div class='child float-left-child' style="margin-left: 2.5em">
-									<button name="${btnStatus}" class="btn btn-danger">Lưu</button>
+									<button name="${btnStatus}" type="submit"
+										class="btn btn-danger">Lưu</button>
+								</div>
+								<div>
 									<p5 class="text-success">${message1}</p5>
 									<p5 class="text-danger">${message0}</p5>
 								</div>
@@ -341,40 +405,55 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Mã Nguyên Liệu</th>
-											<th>Đơn Vị</th>
-											<th>Tên Nguyên Liệu</th>
-											<th>Tồn Kho</th>
-											<th>Ghi Chú</th>
+											<th>Mã Nhân Viên</th>
+											<th>Tên Nhân Viên<</th>
+											<th>Ngày</th>
+											<th>Địa Điểm</th>
+											<th>Giờ Bắt Đầu Ca</th>
+											<th>Giờ Kết Thúc Ca</th>
+											<th>Giới Tính</th>
+											<th>Email</th>
+											<th>Số Điện Thoại</th>
+											<th>CMND</th>
 											<th>Sửa</th>
 											<th>Xóa</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Mã Nguyên Liệu</th>
-											<th>Đơn Vị</th>
-											<th>Tên Nguyên Liệu</th>
-											<th>Tồn Kho</th>
-											<th>Ghi Chú</th>
+											<th>Mã Nhân Viên</th>
+											<th>Username</th>
+											<th>Họ và Tên Đệm</th>
+											<th>LastName</th>
+											<th>Ngày Sinh</th>
+											<th>Địa Chỉ</th>
+											<th>Giới Tính</th>
+											<th>Email</th>
+											<th>Số Điện Thoại</th>
+											<th>CMND</th>
 											<th>Sửa</th>
 											<th>Xóa</th>
 										</tr>
 									</tfoot>
 									<tbody>
-										<c:forEach var="nl" items="${nls}">
+										<c:forEach var="nv" items="${nvs}">
 											<tr>
-												<td>${nl.manguyenlieu}</td>
-												<td>${nl.nguyenlieu_donvi.getMadonvi()}</td>
-												<td>${nl.tennguyenlieu}</td>
-												<td>${nl.soluong}</td>
-												<td>${nl.ghichu}</td>
+												<td>${nv.maNV}</td>
+												<td>${nv.taikhoan.getUsername()}</td>
+												<td>${nv.ho}</td>
+												<td>${nv.ten}</td>
+												<td>${nv.ngaySinh}</td>
+												<td>${nv.diaChi}</td>
+												<td>${nv.gioiTinh}</td>
+												<td>${nv.email}</td>
+												<td>${nv.SDT}</td>
+												<td>${nv.CMND}</td>
 												<td><a
-													href="/CoffeeHouse/manager/material/edit/${nl.manguyenlieu}.htm?linkEdit"
-													rel="stylesheet"><img width="31"
-														height="31" src="<c:url value='/resources/img/edit.png'/>" /></a></td>
+													href="/CoffeeHouse/manager/employee/edit/${nv.maNV}.htm?linkEdit"
+													rel="stylesheet"><img width="31" height="31"
+														src="<c:url value='/resources/img/edit.png'/>" /></a></td>
 												<td><a name="btnDelete"
-													href="/CoffeeHouse/manager/material/edit/${nl.manguyenlieu}.htm?linkDelete"
+													href="/CoffeeHouse/manager/employee/edit/${nv.maNV}.htm?linkDelete"
 													rel="stylesheet" role="button"><img width="31"
 														height="31"
 														src="<c:url value='/resources/img/delete.png'/>" /></a>
@@ -457,7 +536,92 @@
 
 	<!-- Page level custom scripts -->
 	<script src="${root}/resources/Manager/js/demo/datatables-demo.js"></script>
-
+	<script>
+		var x, i, j, l, ll, selElmnt, a, b, c;
+		/*look for any elements with the class "custom-select":*/
+		x = document.getElementsByClassName("custom-select");
+		l = x.length;
+		for (i = 0; i < l; i++) {
+			selElmnt = x[i].getElementsByTagName("select")[0];
+			ll = selElmnt.length;
+			/*for each element, create a new DIV that will act as the selected item:*/
+			a = document.createElement("DIV");
+			a.setAttribute("class", "select-selected");
+			a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+			x[i].appendChild(a);
+			/*for each element, create a new DIV that will contain the option list:*/
+			b = document.createElement("DIV");
+			b.setAttribute("class", "select-items select-hide");
+			for (j = 1; j < ll; j++) {
+				/*for each option in the original select element,
+				create a new DIV that will act as an option item:*/
+				c = document.createElement("DIV");
+				c.innerHTML = selElmnt.options[j].innerHTML;
+				c
+						.addEventListener(
+								"click",
+								function(e) {
+									/*when an item is clicked, update the original select box,
+									and the selected item:*/
+									var y, i, k, s, h, sl, yl;
+									s = this.parentNode.parentNode
+											.getElementsByTagName("select")[0];
+									sl = s.length;
+									h = this.parentNode.previousSibling;
+									for (i = 0; i < sl; i++) {
+										if (s.options[i].innerHTML == this.innerHTML) {
+											s.selectedIndex = i;
+											h.innerHTML = this.innerHTML;
+											y = this.parentNode
+													.getElementsByClassName("same-as-selected");
+											yl = y.length;
+											for (k = 0; k < yl; k++) {
+												y[k].removeAttribute("class");
+											}
+											this.setAttribute("class",
+													"same-as-selected");
+											break;
+										}
+									}
+									h.click();
+								});
+				b.appendChild(c);
+			}
+			x[i].appendChild(b);
+			a.addEventListener("click", function(e) {
+				/*when the select box is clicked, close any other select boxes,
+				and open/close the current select box:*/
+				e.stopPropagation();
+				closeAllSelect(this);
+				this.nextSibling.classList.toggle("select-hide");
+				this.classList.toggle("select-arrow-active");
+			});
+		}
+		function closeAllSelect(elmnt) {
+			/*a function that will close all select boxes in the document,
+			except the current select box:*/
+			var x, y, i, xl, yl, arrNo = [];
+			x = document.getElementsByClassName("select-items");
+			y = document.getElementsByClassName("select-selected");
+			xl = x.length;
+			yl = y.length;
+			for (i = 0; i < yl; i++) {
+				if (elmnt == y[i]) {
+					arrNo.push(i)
+				} else {
+					y[i].classList.remove("select-arrow-active");
+				}
+			}
+			for (i = 0; i < xl; i++) {
+				if (arrNo.indexOf(i)) {
+					x[i].classList.add("select-hide");
+				}
+			}
+		}
+		/*if the user clicks anywhere outside the select box,
+		 then close all select boxes:*/
+		document.addEventListener("click", closeAllSelect);
+	</script>
 </body>
 
 </html>

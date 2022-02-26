@@ -58,7 +58,7 @@ public class BrnchController {
 		return 1;
 	}
 	
-	@RequestMapping(value = "/edit/{maDiaDiem}.htm", params = "linkDelete")
+	@RequestMapping(value = "/edit/{madiadiem}.htm", params = "linkDelete")
 	public String delete(ModelMap model, @ModelAttribute("cn") DiaDiem cn) {
 		System.out.print("linkDelete");
 		int check = this.deleteDiaDiem(cn);
@@ -123,7 +123,7 @@ public class BrnchController {
 	@RequestMapping(value = "/edit", params = "btnEdit")
 	public String edit_User(ModelMap model, @ModelAttribute("cn") DiaDiem cn) {
 		System.out.println("btnEdit");
-		cn.setMaDiaDiem(ma);
+		cn.setMadiadiem(ma);
 		int check = this.updateChiNhanh(cn);
 		if (check != 0) {
 			model.addAttribute("message1", "Edit success!");
@@ -141,15 +141,15 @@ public class BrnchController {
 
 	public DiaDiem get1DiaDiem(String ma) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM DiaDiem where maDiaDiem = :ma";
+		String hql = "FROM DiaDiem where madiadiem = :ma";
 		Query query = session.createQuery(hql);
 		query.setParameter("ma", ma);
 		DiaDiem list = (DiaDiem) query.list().get(0);
 		return list;
 	}
 
-	@RequestMapping(value = "/edit/{maDiaDiem}.htm", params = "linkEdit")
-	public String editUser(ModelMap model, @ModelAttribute("cn") DiaDiem cn, @PathVariable("maDiaDiem") String maDiaDiem) {
+	@RequestMapping(value = "/edit/{madiadiem}.htm", params = "linkEdit")
+	public String editUser(ModelMap model, @ModelAttribute("cn") DiaDiem cn, @PathVariable("madiadiem") String maDiaDiem) {
 		System.out.println("linkEdit");
 		List<DiaDiem> DS = this.getDiaDiems();
 		model.addAttribute("cns", DS);

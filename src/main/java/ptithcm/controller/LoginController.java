@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ptithcm.entity.NhanVien;
 import ptithcm.entity.TaiKhoan;
 
 @Controller
@@ -36,22 +38,25 @@ public class LoginController {
 		String username = rq.getParameter("username");
 		String password = rq.getParameter("password");
 		Session session = factory.getCurrentSession();
-		String hql = "FROM TaiKhoan WHERE Username = :username AND Password = :password";
+		String hql = "FROM TaiKhoan WHERE username = :username AND password = :password";
 		/*
 		 * = '" + username + "' AND password = '" + password + "'";
 		 */ 
 		Query query = session.createQuery(hql);
 		query.setParameter("username", username);
 		query.setParameter("password", password);
+		
 		List<TaiKhoan> list = query.list();
+		
 		if (list.size() == 0) {
 			return "Authority/login";
 		}
 		else {
 			taikhoan = list.get(0);
-//			ss.setAttribute("myLogin", taikhoan);
+			ss.setAttribute("nhanvien", taikhoan.getUsername());
+			System.out.println("Thông tin nhân viên login: " + taikhoan.getUsername());
 //			ss.setAttribute("dn", taikhoan.getAdmin());
-			if (taikhoan.getQuyen().getMaQuyen().equals("QL")){
+			if (taikhoan.getQuyen().getMaquyen().equals("QL")){
 //				List<Seed> list1 = getSeed();
 //				model.addAttribute("Seed", list1);
 				return "Manager/Dashboard";

@@ -2,6 +2,8 @@ package ptithcm.entity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -14,24 +16,28 @@ import javax.persistence.Table;
 @Table(name = "NGUYENLIEU")
 public class NguyenLieu {
 	@Id
-	private String MaNguyenLieu;
+	@Column(name = "MaNguyenLieu")
+	private String manguyenlieu;
 	
 	@ManyToOne
 	@JoinColumn(name="MaDonVi")
 	DonVi nguyenlieu_donvi;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private String TenNguyenLieu;
+	@Column(name = "TenNguyenLieu")
+	private String tennguyenlieu;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private Float Soluong;
+	@Column(name = "Soluong")
+	private Float soluong;
 	
-	private String GhiChu;
+	@Column(name = "GhiChu")
+	private String ghichu;
 	
-	@OneToMany(mappedBy="ctnguyenlieu_nguyenlieu", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="ctnguyenlieu_nguyenlieu", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<CTNguyenLieu> ctnguyenlieu;
 	
-	@OneToMany(mappedBy="ctphieunhap_nguyenlieu", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="ctphieunhap_nguyenlieu", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<CTPhieuNhap> ctphieunhap;
 	
 	public Collection<CTNguyenLieu> getCTNguyenLieus() {
@@ -42,14 +48,6 @@ public class NguyenLieu {
 		return ctphieunhap;
 	}
 
-	public String getMaNguyenLieu() {
-		return MaNguyenLieu;
-	}
-
-	public void setMaNguyenLieu(String maNguyenLieu) {
-		MaNguyenLieu = maNguyenLieu;
-	}
-
 	public DonVi getNguyenlieu_donvi() {
 		return nguyenlieu_donvi;
 	}
@@ -57,29 +55,37 @@ public class NguyenLieu {
 	public void setNguyenlieu_donvi(DonVi nguyenlieu_donvi) {
 		this.nguyenlieu_donvi = nguyenlieu_donvi;
 	}
-
-	public String getTenNguyenLieu() {
-		return TenNguyenLieu;
+	
+	public String getManguyenlieu() {
+		return manguyenlieu;
 	}
 
-	public void setTenNguyenLieu(String tenNguyenLieu) {
-		TenNguyenLieu = tenNguyenLieu;
+	public void setManguyenlieu(String manguyenlieu) {
+		this.manguyenlieu = manguyenlieu;
+	}
+
+	public String getTennguyenlieu() {
+		return tennguyenlieu;
+	}
+
+	public void setTennguyenlieu(String tennguyenlieu) {
+		this.tennguyenlieu = tennguyenlieu;
 	}
 
 	public Float getSoluong() {
-		return Soluong;
+		return soluong;
 	}
 
 	public void setSoluong(Float soluong) {
-		Soluong = soluong;
+		this.soluong = soluong;
 	}
 
-	public String getGhiChu() {
-		return GhiChu;
+	public String getGhichu() {
+		return ghichu;
 	}
 
-	public void setGhiChu(String ghiChu) {
-		GhiChu = ghiChu;
+	public void setGhichu(String ghichu) {
+		this.ghichu = ghichu;
 	}
 
 	public Collection<CTNguyenLieu> getCtnguyenlieu() {
@@ -97,6 +103,4 @@ public class NguyenLieu {
 	public void setCtphieunhap(Collection<CTPhieuNhap> ctphieunhap) {
 		this.ctphieunhap = ctphieunhap;
 	}
-
-	
 }

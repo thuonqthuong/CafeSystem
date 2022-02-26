@@ -2,6 +2,8 @@ package ptithcm.entity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -14,23 +16,26 @@ import javax.persistence.Table;
 public class DonVi {
 	@Id
 //	@NotBlank(message = "Cannot be blank")
-	private String MaDonVi;
+	@Column(name = "MaDonVi")
+	private String madonvi;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private String TenDonVi;
+	@Column(name = "TenDonVi")
+	private String tendonvi;
 	
-	private String GhiChu;
+	@Column(name = "GhiChu")
+	private String ghichu;
 	
-	@OneToMany(mappedBy="cthoadon_donvi", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="cthoadon_donvi", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<CTHoaDon> cthoadon;
 	
-	@OneToMany(mappedBy="nguyenlieu_donvi", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="nguyenlieu_donvi", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<NguyenLieu> nguyenlieu;
 	
 	@OneToMany(mappedBy="ctphieunhap_donvi", fetch = FetchType.EAGER)
 	Collection<CTPhieuNhap> ctphieunhap;
 	
-	@OneToMany(mappedBy="ctnguyenlieu_donvi", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="ctnguyenlieu_donvi", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<CTNguyenLieu> ctnguyenlieu;
 	
 	public Collection<CTHoaDon> getCTHoaDons() {
@@ -49,29 +54,61 @@ public class DonVi {
 		return ctnguyenlieu;
 	}
 
-	public String getMaDonVi() {
-		return MaDonVi;
+	public String getMadonvi() {
+		return madonvi;
 	}
 
-	public void setMaDonVi(String maDonVi) {
-		MaDonVi = maDonVi;
+	public void setMadonvi(String madonvi) {
+		this.madonvi = madonvi;
 	}
 
-	public String getTenDonVi() {
-		return TenDonVi;
+	public String getTendonvi() {
+		return tendonvi;
 	}
 
-	public void setTenDonVi(String tenDonVi) {
-		TenDonVi = tenDonVi;
+	public void setTendonvi(String tendonvi) {
+		this.tendonvi = tendonvi;
 	}
 
-	public String getGhiChu() {
-		return GhiChu;
+	public String getGhichu() {
+		return ghichu;
 	}
 
-	public void setGhiChu(String ghiChu) {
-		GhiChu = ghiChu;
+	public void setGhichu(String ghichu) {
+		this.ghichu = ghichu;
 	}
-	
+
+	public Collection<CTHoaDon> getCthoadon() {
+		return cthoadon;
+	}
+
+	public void setCthoadon(Collection<CTHoaDon> cthoadon) {
+		this.cthoadon = cthoadon;
+	}
+
+	public Collection<NguyenLieu> getNguyenlieu() {
+		return nguyenlieu;
+	}
+
+	public void setNguyenlieu(Collection<NguyenLieu> nguyenlieu) {
+		this.nguyenlieu = nguyenlieu;
+	}
+
+	public Collection<CTPhieuNhap> getCtphieunhap() {
+		return ctphieunhap;
+	}
+
+	public void setCtphieunhap(Collection<CTPhieuNhap> ctphieunhap) {
+		this.ctphieunhap = ctphieunhap;
+	}
+
+	public Collection<CTNguyenLieu> getCtnguyenlieu() {
+		return ctnguyenlieu;
+	}
+
+	public void setCtnguyenlieu(Collection<CTNguyenLieu> ctnguyenlieu) {
+		this.ctnguyenlieu = ctnguyenlieu;
+	}
+
 	
 }

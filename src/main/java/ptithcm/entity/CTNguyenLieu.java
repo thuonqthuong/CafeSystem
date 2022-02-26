@@ -1,5 +1,6 @@
 package ptithcm.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,8 @@ public class CTNguyenLieu {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	@NotBlank(message = "Cannot be blank")
-	private Integer Id;
+	@Column(name = "Id")
+	private Integer id;
 	
 	@ManyToOne
 	@JoinColumn(name="MaSanPham")
@@ -29,14 +31,23 @@ public class CTNguyenLieu {
 	@JoinColumn(name="MaDonVi")
 	DonVi ctnguyenlieu_donvi;
 	
-	private Float SoLuong;
+	@Column(name = "SoLuong")
+	private Float soluong;
+
+	public NguyenLieu getCtnguyenlieu_nguyenlieu() {
+		return ctnguyenlieu_nguyenlieu;
+	}
+
+	public void setCtnguyenlieu_nguyenlieu(NguyenLieu ctnguyenlieu_nguyenlieu) {
+		this.ctnguyenlieu_nguyenlieu = ctnguyenlieu_nguyenlieu;
+	}
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public SanPham getCtnguyenlieu_sanpham() {
@@ -47,20 +58,21 @@ public class CTNguyenLieu {
 		this.ctnguyenlieu_sanpham = ctnguyenlieu_sanpham;
 	}
 
-	public NguyenLieu getCtnguyenlieu_nguyenlieu() {
-		return ctnguyenlieu_nguyenlieu;
+	public DonVi getCtnguyenlieu_donvi() {
+		return ctnguyenlieu_donvi;
 	}
 
-	public void setCtnguyenlieu_nguyenlieu(NguyenLieu ctnguyenlieu_nguyenlieu) {
-		this.ctnguyenlieu_nguyenlieu = ctnguyenlieu_nguyenlieu;
+	public void setCtnguyenlieu_donvi(DonVi ctnguyenlieu_donvi) {
+		this.ctnguyenlieu_donvi = ctnguyenlieu_donvi;
 	}
 
-	public Float getSoLuong() {
-		return SoLuong;
+	public Float getSoluong() {
+		return soluong;
 	}
 
-	public void setSoLuong(Float soLuong) {
-		SoLuong = soLuong;
+	public void setSoluong(Float soluong) {
+		this.soluong = soluong;
 	}
-
+	
+	
 }

@@ -2,6 +2,8 @@ package ptithcm.entity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -13,18 +15,21 @@ import javax.persistence.Table;
 @Table(name = "DIADIEM")
 public class DiaDiem {
 	@Id
-	private String MaDiaDiem;
+	@Column(name = "MaDiaDiem")
+	private String madiadiem;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private boolean TrangThai;
+	@Column(name = "TrangThai")
+	private boolean trangthai;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private String ViTri;
+	@Column(name = "ViTri")
+	private String vitri;
 	
-	@OneToMany(mappedBy="phieunhap_diadiem", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="phieunhap_diadiem", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<PhieuNhap> phieunhap;
 	
-	@OneToMany(mappedBy="calamviec_diadiem", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="calamviec_diadiem", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<CaLamViec> calamviec;
 	
 	public Collection<PhieuNhap> getPhieuNhaps() {
@@ -34,31 +39,6 @@ public class DiaDiem {
 	public Collection<CaLamViec> getCaLamViecs() {
 		return calamviec;
 	}
-
-	public String getMaDiaDiem() {
-		return MaDiaDiem;
-	}
-
-	public void setMaDiaDiem(String maDiaDiem) {
-		MaDiaDiem = maDiaDiem;
-	}
-
-	public boolean isTrangThai() {
-		return TrangThai;
-	}
-
-	public void setTrangThai(boolean trangThai) {
-		TrangThai = trangThai;
-	}
-
-	public String getViTri() {
-		return ViTri;
-	}
-
-	public void setViTri(String viTri) {
-		ViTri = viTri;
-	}
-
 	public Collection<PhieuNhap> getPhieunhap() {
 		return phieunhap;
 	}
@@ -73,6 +53,30 @@ public class DiaDiem {
 
 	public void setCalamviec(Collection<CaLamViec> calamviec) {
 		this.calamviec = calamviec;
+	}
+
+	public String getMadiadiem() {
+		return madiadiem;
+	}
+
+	public void setMadiadiem(String madiadiem) {
+		this.madiadiem = madiadiem;
+	}
+
+	public boolean isTrangthai() {
+		return trangthai;
+	}
+
+	public void setTrangthai(boolean trangthai) {
+		this.trangthai = trangthai;
+	}
+
+	public String getVitri() {
+		return vitri;
+	}
+
+	public void setVitri(String vitri) {
+		this.vitri = vitri;
 	}
 	
 	

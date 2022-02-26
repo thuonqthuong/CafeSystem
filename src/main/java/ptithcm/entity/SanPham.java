@@ -2,6 +2,8 @@ package ptithcm.entity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -13,22 +15,26 @@ import javax.persistence.Table;
 public class SanPham {
 	@Id
 //	@NotBlank(message = "Cannot be blank")
-	private String MaSanPham;
+	@Column(name = "MaSanPham")
+	private String masanpham;
 	
-	private String CongThuc;
+	@Column(name = "CongThuc")
+	private String congthuc;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private String TenSanPham;
+	@Column(name = "TenSanPham")
+	private String tensanpham;
 	
-	private String GhiChu;
+	@Column(name = "GhiChu")
+	private String ghichu;
 	
-	@OneToMany(mappedBy="cthoadon_sanpham", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="cthoadon_sanpham", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<CTHoaDon> cthoadon;
 	
-	@OneToMany(mappedBy="ctnguyenlieu_sanpham", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="ctnguyenlieu_sanpham", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<CTNguyenLieu> ctnguyenlieu;
 	
-	@OneToMany(mappedBy="gia_sanpham", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="gia_sanpham", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<Gia> gia;
 	
 	public Collection<CTHoaDon> getCTHoaDons() {
@@ -40,30 +46,47 @@ public class SanPham {
 	public Collection<Gia> getGias() {
 		return gia;
 	}
-	public String getMaSanPham() {
-		return MaSanPham;
+	public String getMasanpham() {
+		return masanpham;
 	}
-	public void setMaSanPham(String maSanPham) {
-		MaSanPham = maSanPham;
+	public void setMasanpham(String masanpham) {
+		this.masanpham = masanpham;
 	}
-	public String getCongThuc() {
-		return CongThuc;
+	public String getCongthuc() {
+		return congthuc;
 	}
-	public void setCongThuc(String congThuc) {
-		CongThuc = congThuc;
+	public void setCongthuc(String congthuc) {
+		this.congthuc = congthuc;
 	}
-	public String getTenSanPham() {
-		return TenSanPham;
+	public String getTensanpham() {
+		return tensanpham;
 	}
-	public void setTenSanPham(String tenSanPham) {
-		TenSanPham = tenSanPham;
+	public void setTensanpham(String tensanpham) {
+		this.tensanpham = tensanpham;
 	}
-	public String getGhiChu() {
-		return GhiChu;
+	public String getGhichu() {
+		return ghichu;
 	}
-	public void setGhiChu(String ghiChu) {
-		GhiChu = ghiChu;
+	public void setGhichu(String ghichu) {
+		this.ghichu = ghichu;
 	}
-	
+	public Collection<CTHoaDon> getCthoadon() {
+		return cthoadon;
+	}
+	public void setCthoadon(Collection<CTHoaDon> cthoadon) {
+		this.cthoadon = cthoadon;
+	}
+	public Collection<CTNguyenLieu> getCtnguyenlieu() {
+		return ctnguyenlieu;
+	}
+	public void setCtnguyenlieu(Collection<CTNguyenLieu> ctnguyenlieu) {
+		this.ctnguyenlieu = ctnguyenlieu;
+	}
+	public Collection<Gia> getGia() {
+		return gia;
+	}
+	public void setGia(Collection<Gia> gia) {
+		this.gia = gia;
+	}
 	
 }

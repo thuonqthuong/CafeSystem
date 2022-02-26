@@ -14,6 +14,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ptithcm.entity.CTPhieuNhap;
 import ptithcm.entity.SanPham;
 
 @Controller
@@ -23,6 +25,7 @@ public class PrdctController {
 	@Autowired
 	SessionFactory factory;
 	private String ma;
+	
 
 	// ----------------------------KHỞI ĐẦU----------------------------
 	public List<SanPham> getSanPhams() {
@@ -58,9 +61,9 @@ public class PrdctController {
 		return 1;
 	}
 
-	@RequestMapping(value = "/edit/{maSanPham}.htm", params = "linkDelete")
+	@RequestMapping(value = "/edit/{masanpham}.htm", params = "linkDelete")
 	public String delete(ModelMap model, @ModelAttribute("sp") SanPham sp,
-			@PathVariable("maSanPham") String maSanPham) {
+			@PathVariable("masanpham") String maSanPham) {
 		System.out.print("linkDelete");
 		int check = this.deleteSanPham(sp);
 		if (check != 0) {
@@ -68,6 +71,8 @@ public class PrdctController {
 		} else {
 			model.addAttribute("message0", "Delete fail");
 		}
+		model.addAttribute("btnStatus", "btnAdd");
+		model.addAttribute("sp", new SanPham());
 		List<SanPham> DS = this.getSanPhams();
 		model.addAttribute("sps", DS);
 
@@ -125,7 +130,7 @@ public class PrdctController {
 	@RequestMapping(value = "/edit", params = "btnEdit")
 	public String edit_SanPham(ModelMap model, @ModelAttribute("sp") SanPham sp) {
 		System.out.println("btnEdit");
-		sp.setMaSanPham(ma);
+		sp.setMasanpham(ma);
 		int check = this.updateSanPham(sp);
 		if (check != 0) {
 			model.addAttribute("message1", "Edit success!");
@@ -143,16 +148,16 @@ public class PrdctController {
 
 	public SanPham get1SanPham(String ma) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM SanPham where maSanPham = :ma";
+		String hql = "FROM SanPham where masanpham = :ma";
 		Query query = session.createQuery(hql);
 		query.setParameter("ma", ma);
 		SanPham list = (SanPham) query.list().get(0);
 		return list;
 	}
 
-	@RequestMapping(value = "/edit/{maSanPham}.htm", params = "linkEdit")
+	@RequestMapping(value = "/edit/{masanpham}.htm", params = "linkEdit")
 	public String editUser(ModelMap model, @ModelAttribute("sp") SanPham sp,
-			@PathVariable("maSanPham") String maSanPham) {
+			@PathVariable("masanpham") String maSanPham) {
 		System.out.println("linkEdit");
 		List<SanPham> DS = this.getSanPhams();
 		model.addAttribute("sps", DS);

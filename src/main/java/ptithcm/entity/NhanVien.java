@@ -3,6 +3,8 @@ package ptithcm.entity;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -18,43 +20,54 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name="NHANVIEN")
 public class NhanVien {
 	@Id
-	private String MaNV;
+	@Column(name = "MaNV")
+	private String manv;
+	
 	@ManyToOne
 	@JoinColumn(name="Username") 
 	TaiKhoan taikhoan;
 	
-	private String Ho;
+	@Column(name = "Ho")
+	private String ho;
+	
 //	@NotBlank(message = "Cannot be blank")
-	private String Ten;
+	@Column(name = "Ten")
+	private String ten;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-	private Date NgaySinh;
+	@Column(name = "NgaySinh")
+	private Date ngaysinh;
 	
-	private String DiaChi;
-	
-//	@NotBlank(message = "Cannot be blank")
-	private String GioiTinh;
-	
-//	@NotBlank(message = "Cannot be blank")
-	private String Email;
+	@Column(name = "DiaChi")
+	private String diachi;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private String SDT;
+	@Column(name = "GioiTinh")
+	private String gioitinh;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private String CMND;
+	@Column(name = "Email")
+	private String email;
 	
-	@OneToMany(mappedBy="chamluong_nhanvien", fetch = FetchType.EAGER)
+//	@NotBlank(message = "Cannot be blank")
+	@Column(name = "SDT")
+	private String sdt;
+	
+//	@NotBlank(message = "Cannot be blank")
+	@Column(name = "CMND")
+	private String cmnd;
+	
+	@OneToMany(mappedBy="chamluong_nhanvien", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<ChamLuong> chamluong;
 	
-	@OneToMany(mappedBy="hoadon_nhanvien", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="hoadon_nhanvien", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<HoaDon> hoadon;
 	
-	@OneToMany(mappedBy="phieunhap_nhanvien", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="phieunhap_nhanvien", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<PhieuNhap> phieunhap;
 	
-	@OneToMany(mappedBy="ctcalamviec_nhanvien", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="ctcalamviec_nhanvien", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<CTCaLamViec> ctcalamviec;
 	
 	public Collection<ChamLuong> getChamLuongs() {
@@ -69,65 +82,11 @@ public class NhanVien {
 	public Collection<CTCaLamViec> getCTCaLamViecs() {
 		return ctcalamviec;
 	}
-	public String getMaNV() {
-		return MaNV;
-	}
-	public void setMaNV(String maNV) {
-		MaNV = maNV;
-	}
 	public TaiKhoan getTaikhoan() {
 		return taikhoan;
 	}
 	public void setTaikhoan(TaiKhoan taikhoan) {
 		this.taikhoan = taikhoan;
-	}
-	public String getHo() {
-		return Ho;
-	}
-	public void setHo(String ho) {
-		Ho = ho;
-	}
-	public String getTen() {
-		return Ten;
-	}
-	public void setTen(String ten) {
-		Ten = ten;
-	}
-	public Date getNgaySinh() {
-		return NgaySinh;
-	}
-	public void setNgaySinh(Date ngaySinh) {
-		NgaySinh = ngaySinh;
-	}
-	public String getDiaChi() {
-		return DiaChi;
-	}
-	public void setDiaChi(String diaChi) {
-		DiaChi = diaChi;
-	}
-	public String getGioiTinh() {
-		return GioiTinh;
-	}
-	public void setGioiTinh(String gioiTinh) {
-		GioiTinh = gioiTinh;
-	}
-	public String getEmail() {
-		return Email;
-	}
-	public void setEmail(String email) {
-		Email = email;
-	}
-	public String getSDT() {
-		return SDT;
-	}
-	public void setSDT(String sDT) {
-		SDT = sDT;
-	}
-	public String getCMND() {
-		return CMND;
-	}
-	public void setCMND(String cMND) {
-		CMND = cMND;
 	}
 	public Collection<ChamLuong> getChamluong() {
 		return chamluong;
@@ -152,6 +111,60 @@ public class NhanVien {
 	}
 	public void setCtcalamviec(Collection<CTCaLamViec> ctcalamviec) {
 		this.ctcalamviec = ctcalamviec;
+	}
+	public String getManv() {
+		return manv;
+	}
+	public void setManv(String manv) {
+		this.manv = manv;
+	}
+	public String getHo() {
+		return ho;
+	}
+	public void setHo(String ho) {
+		this.ho = ho;
+	}
+	public String getTen() {
+		return ten;
+	}
+	public void setTen(String ten) {
+		this.ten = ten;
+	}
+	public Date getNgaysinh() {
+		return ngaysinh;
+	}
+	public void setNgaysinh(Date ngaysinh) {
+		this.ngaysinh = ngaysinh;
+	}
+	public String getDiachi() {
+		return diachi;
+	}
+	public void setDiachi(String diachi) {
+		this.diachi = diachi;
+	}
+	public String getGioitinh() {
+		return gioitinh;
+	}
+	public void setGioitinh(String gioitinh) {
+		this.gioitinh = gioitinh;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getSdt() {
+		return sdt;
+	}
+	public void setSdt(String sdt) {
+		this.sdt = sdt;
+	}
+	public String getCmnd() {
+		return cmnd;
+	}
+	public void setCmnd(String cmnd) {
+		this.cmnd = cmnd;
 	}
 	
 }

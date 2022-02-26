@@ -1,5 +1,6 @@
 package ptithcm.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +14,11 @@ import javax.persistence.Table;
 public class CTPhieuNhap {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Id;
+	@Column(name = "Id")
+	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name="MaNguyenLieu")
+	@JoinColumn(name="maNguyenLieu")
 	NguyenLieu ctphieunhap_nguyenlieu;
 	
 	@ManyToOne
@@ -24,17 +26,15 @@ public class CTPhieuNhap {
 	PhieuNhap phieunhap;
 	
 	@ManyToOne
-	@JoinColumn(name="MaDonVi")
+	@JoinColumn(name="maDonVi")
 	DonVi ctphieunhap_donvi;
 	
-	private Float SoLuong;
-	private Double DonGia;
-	public Integer getId() {
-		return Id;
-	}
-	public void setId(Integer id) {
-		Id = id;
-	}
+	@Column(name = "SoLuong")
+	private Float soluong;
+	
+	@Column(name = "DonGia")
+	private Double dongia;
+	
 	public NguyenLieu getCtphieunhap_nguyenlieu() {
 		return ctphieunhap_nguyenlieu;
 	}
@@ -47,17 +47,29 @@ public class CTPhieuNhap {
 	public void setPhieunhap(PhieuNhap phieunhap) {
 		this.phieunhap = phieunhap;
 	}
-	public Float getSoLuong() {
-		return SoLuong;
+	public DonVi getCtphieunhap_donvi() {
+		return ctphieunhap_donvi;
 	}
-	public void setSoLuong(Float soLuong) {
-		SoLuong = soLuong;
+	public void setCtphieunhap_donvi(DonVi ctphieunhap_donvi) {
+		this.ctphieunhap_donvi = ctphieunhap_donvi;
 	}
-	public Double getDonGia() {
-		return DonGia;
+	public Integer getId() {
+		return id;
 	}
-	public void setDonGia(Double donGia) {
-		DonGia = donGia;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Float getSoluong() {
+		return soluong;
+	}
+	public void setSoluong(Float soluong) {
+		this.soluong = soluong;
+	}
+	public Double getDongia() {
+		return dongia;
+	}
+	public void setDongia(Double dongia) {
+		this.dongia = dongia;
 	}
 	
 }

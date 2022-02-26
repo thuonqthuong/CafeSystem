@@ -2,6 +2,7 @@ package ptithcm.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,29 +20,23 @@ public class PhieuNhap {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	@NotBlank(message = "Cannot be blank")
-	private Integer MaPhieuNhap;
+	@Column(name = "MaPhieuNhap")
+	private Integer maphieunhap;
 	
 	@ManyToOne
 	@JoinColumn(name="MaNV")
 	NhanVien phieunhap_nhanvien;
 	
 	@ManyToOne
-	@JoinColumn(name="MaDiaDiem")
+	@JoinColumn(name="maDiaDiem")
 	DiaDiem phieunhap_diadiem;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 //	@NotBlank(message = "Cannot be blank")
-	private Date NgayGio;
-
-	public Integer getMaPhieuNhap() {
-		return MaPhieuNhap;
-	}
-
-	public void setMaPhieuNhap(Integer maPhieuNhap) {
-		MaPhieuNhap = maPhieuNhap;
-	}
-
+	@Column(name = "NgayGio")
+	private Date ngaygio;
+	
 	public NhanVien getPhieunhap_nhanvien() {
 		return phieunhap_nhanvien;
 	}
@@ -58,13 +53,20 @@ public class PhieuNhap {
 		this.phieunhap_diadiem = phieunhap_diadiem;
 	}
 
-	public Date getNgayGio() {
-		return NgayGio;
+	public Integer getMaphieunhap() {
+		return maphieunhap;
 	}
 
-	public void setNgayGio(Date ngayGio) {
-		NgayGio = ngayGio;
+	public void setMaphieunhap(Integer maphieunhap) {
+		this.maphieunhap = maphieunhap;
 	}
 
-	
+	public Date getNgaygio() {
+		return ngaygio;
+	}
+
+	public void setNgaygio(Date ngaygio) {
+		this.ngaygio = ngaygio;
+	}
+
 }

@@ -1,5 +1,6 @@
 package ptithcm.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,8 @@ import javax.persistence.Table;
 public class CTHoaDon {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Id;
+	@Column(name = "Id")
+	private Integer id;
 	
 	@ManyToOne
 	@JoinColumn(name="MaSanPham")
@@ -27,15 +29,8 @@ public class CTHoaDon {
 	@JoinColumn(name="MaDonVi")
 	DonVi cthoadon_donvi;
 	
-	private Float SoLuong;
-
-	public Integer getId() {
-		return Id;
-	}
-
-	public void setId(Integer id) {
-		Id = id;
-	}
+	@Column(name = "SoLuong")
+	private Float soluong;
 
 	public SanPham getCthoadon_sanpham() {
 		return cthoadon_sanpham;
@@ -61,13 +56,20 @@ public class CTHoaDon {
 		this.cthoadon_donvi = cthoadon_donvi;
 	}
 
-	public Float getSoLuong() {
-		return SoLuong;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setSoLuong(Float soLuong) {
-		SoLuong = soLuong;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
+	public Float getSoluong() {
+		return soluong;
+	}
+
+	public void setSoluong(Float soluong) {
+		this.soluong = soluong;
+	}
 	
 }

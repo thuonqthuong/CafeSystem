@@ -2,6 +2,8 @@ package ptithcm.entity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -16,31 +18,26 @@ import javax.persistence.TemporalType;
 @Table(name = "CALAMVIEC")
 public class CaLamViec {
 	@Id
-	private String MaCa;
+	@Column(name = "MaCa")
+	private String maca;
 	
 	@ManyToOne
 	@JoinColumn(name="MaDiaDiem")
 	DiaDiem calamviec_diadiem;
 
 	@Temporal(TemporalType.TIME)
-	private java.util.Date GioBatDau;
+	@Column(name = "GioBatDau")
+	private java.util.Date giobatdau;
 	
 	@Temporal(TemporalType.TIME)
-	private java.util.Date GioKetThuc;
+	@Column(name = "GioKetThuc")
+	private java.util.Date gioketthuc;
 	
-	@OneToMany(mappedBy="ctcalamviec_calamviec", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="ctcalamviec_calamviec", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<CTCaLamViec> ctcalamviec;
 	
 	public Collection<CTCaLamViec> getCTCaLamViecs() {
 		return ctcalamviec;
-	}
-
-	public String getMaCa() {
-		return MaCa;
-	}
-
-	public void setMaCa(String maCa) {
-		MaCa = maCa;
 	}
 
 	public DiaDiem getCalamviec_diadiem() {
@@ -51,28 +48,36 @@ public class CaLamViec {
 		this.calamviec_diadiem = calamviec_diadiem;
 	}
 
-	public java.util.Date getGioBatDau() {
-		return GioBatDau;
-	}
-
-	public void setGioBatDau(java.util.Date gioBatDau) {
-		GioBatDau = gioBatDau;
-	}
-
-	public java.util.Date getGioKetThuc() {
-		return GioKetThuc;
-	}
-
-	public void setGioKetThuc(java.util.Date gioKetThuc) {
-		GioKetThuc = gioKetThuc;
-	}
-
 	public Collection<CTCaLamViec> getCtcalamviec() {
 		return ctcalamviec;
 	}
 
 	public void setCtcalamviec(Collection<CTCaLamViec> ctcalamviec) {
 		this.ctcalamviec = ctcalamviec;
+	}
+
+	public String getMaca() {
+		return maca;
+	}
+
+	public void setMaca(String maca) {
+		this.maca = maca;
+	}
+
+	public java.util.Date getGiobatdau() {
+		return giobatdau;
+	}
+
+	public void setGiobatdau(java.util.Date giobatdau) {
+		this.giobatdau = giobatdau;
+	}
+
+	public java.util.Date getGioketthuc() {
+		return gioketthuc;
+	}
+
+	public void setGioketthuc(java.util.Date gioketthuc) {
+		this.gioketthuc = gioketthuc;
 	}
 	
 }

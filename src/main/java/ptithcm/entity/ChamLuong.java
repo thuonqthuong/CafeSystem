@@ -1,5 +1,6 @@
 package ptithcm.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,48 +12,52 @@ import javax.persistence.Table;
 public class ChamLuong {
 	@Id
 //	@NotBlank(message = "Cannot be blank")
-	private String MaLuong;
+	@Column(name = "MaLuong")
+	private String maluong;
 	
 	@ManyToOne
 	@JoinColumn(name="MaNV")
 	NhanVien chamluong_nhanvien;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private Double LuongCB;
+	@Column(name = "LuongCB")
+	private Double luongcb;
 	
-	private Float HeSoLuong;
+	@Column(name = "HeSoLuong")
+	private Float hesoluong;
 	
-	private Double TienThuong;
+	@Column(name = "TienThuong")
+	private Double tienthuong;
 	
-	public String getMaLuong() {
-		return MaLuong;
-	}
-	public void setMaLuong(String maLuong) {
-		MaLuong = maLuong;
-	}
 	public NhanVien getChamluong_nhanvien() {
 		return chamluong_nhanvien;
 	}
 	public void setChamluong_nhanvien(NhanVien chamluong_nhanvien) {
 		this.chamluong_nhanvien = chamluong_nhanvien;
 	}
-	public Double getLuongCB() {
-		return LuongCB;
+	public String getMaluong() {
+		return maluong;
 	}
-	public void setLuongCB(Double luongCB) {
-		LuongCB = luongCB;
+	public void setMaluong(String maluong) {
+		this.maluong = maluong;
 	}
-	public Float getHeSoLuong() {
-		return HeSoLuong;
+	public Double getLuongcb() {
+		return luongcb;
 	}
-	public void setHeSoLuong(Float heSoLuong) {
-		HeSoLuong = heSoLuong;
+	public void setLuongcb(Double luongcb) {
+		this.luongcb = luongcb;
 	}
-	public Double getTienThuong() {
-		return TienThuong;
+	public Float getHesoluong() {
+		return hesoluong;
 	}
-	public void setTienThuong(Double tienThuong) {
-		TienThuong = tienThuong;
+	public void setHesoluong(Float hesoluong) {
+		this.hesoluong = hesoluong;
+	}
+	public Double getTienthuong() {
+		return tienthuong;
+	}
+	public void setTienthuong(Double tienthuong) {
+		this.tienthuong = tienthuong;
 	}
 	
 }

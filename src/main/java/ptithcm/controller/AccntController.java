@@ -79,6 +79,7 @@ public class AccntController {
 		}
 		List<TaiKhoan> DS = this.getTaiKhoans();
 		model.addAttribute("tks", DS);
+		model.addAttribute("btnStatus", "btnAdd");
 		return "Manager/account";
 	}
 	//----------------------------THÊM----------------------------
@@ -100,7 +101,7 @@ public class AccntController {
 		}
 
 		@RequestMapping(value = "/edit", params = "btnAdd")
-		public String addUser(ModelMap model, @ModelAttribute("tk") TaiKhoan tk) {
+		public String addAccount(ModelMap model, @ModelAttribute("tk") TaiKhoan tk) {
 			System.out.println("btnAdd");
 			int check = this.insertTaiKhoan(tk);
 			if (check != 0) {
@@ -132,7 +133,7 @@ public class AccntController {
 		}
 
 		@RequestMapping(value = "/edit", params = "btnEdit")
-		public String edit_User(ModelMap model, @ModelAttribute("tk") TaiKhoan tk) {
+		public String edit_Account(ModelMap model, @ModelAttribute("tk") TaiKhoan tk) {
 			System.out.println("btnEdit");
 			tk.setUsername(ma);
 			int check = this.updateTaiKhoan(tk);
@@ -160,7 +161,7 @@ public class AccntController {
 		}
 
 		@RequestMapping(value = "/edit/{username}.htm", params = "linkEdit")
-		public String editUser(ModelMap model, @ModelAttribute("tk") TaiKhoan tk, @PathVariable("username") String username) {
+		public String editAccount(ModelMap model, @ModelAttribute("tk") TaiKhoan tk, @PathVariable("username") String username) {
 			System.out.println("linkEdit");
 			List<TaiKhoan> DS = this.getTaiKhoans();
 			model.addAttribute("tks", DS);

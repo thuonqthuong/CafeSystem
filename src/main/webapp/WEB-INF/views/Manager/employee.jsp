@@ -79,7 +79,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Tables</title>
+<title>quản lý nhân viên</title>
 
 <!-- Custom fonts for this template -->
 <link
@@ -325,96 +325,87 @@
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
 					<div class="card-header">
 						<label class="font-weight-bold"
-							style="font-size: 20px; color: #800000">MANAGE EMPLOYEES</label>
+							style="font-size: 20px; color: #800000">QUẢN LÝ NHÂN VIÊN</label>
 					</div>
 					<div class="card-header">
 						<form:form method="POST"
 							action="${root}/manager/employee/edit.htm" modelAttribute="nv"
 							class="row g-3" rel="stylesheet">
 							<div class="col-md-4">
-								<label class="font-weight-bold">Employee ID</label>
-								<form:input path="maNV" type="text" class="form-control"
-									placeholder="Type Employee ID" />
+								<label class="font-weight-bold">Mã Nhân Viên</label>
+								<form:input path="manv" type="text" class="form-control" />
 								<p style="color: red; font-style: oblique">
-									<form:errors path="maNV" />
+									<form:errors path="manv" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Username</label>
+								<label class="font-weight-bold">Tên Đăng Nhập</label>
 								<form:select path="taikhoan.username" items="${accounts}"
 									itemValue="username" itemLabel="username" class="form-control"
 									aria-label=".form-select-lg example">
 								</form:select>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">FirstName</label>
-								<form:input path="ho" type="text" class="form-control"
-									placeholder="Type FirstName" />
+								<label class="font-weight-bold">Họ và Tên Đệm</label>
+								<form:input path="ho" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
 									<form:errors path="ho" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">LastName</label>
-								<form:input path="ten" type="text" class="form-control"
-									placeholder="Type LastName" />
+								<label class="font-weight-bold">Tên</label>
+								<form:input path="ten" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
 									<form:errors path="ten" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Date of Birth</label>
-								<form:input path="ngaySinh" type="text" class="form-control"
-									placeholder="Type Date of Birth" />
+								<label class="font-weight-bold">Ngày Sinh</label>
+								<form:input path="ngaysinh" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="ngaySinh" />
+									<form:errors path="ngaysinh" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Address</label>
-								<form:input path="diaChi" type="text" class="form-control"
-									placeholder="Type Address" />
+								<label class="font-weight-bold">Địa Chỉ</label>
+								<form:input path="diachi" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="diaChi" />
+									<form:errors path="diachi" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Sex</label>
-								<form:input path="gioiTinh" type="text" class="form-control"
-									placeholder="Type Sex" />
+								<label class="font-weight-bold">Giới Tính</label>
+								<form:input path="gioitinh" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="gioiTinh" />
+									<form:errors path="gioitinh" />
 								</p>
 							</div>
 							<div class="col-md-4">
 								<label class="font-weight-bold">Email</label>
-								<form:input path="email" type="text" class="form-control"
-									placeholder="Type Email" />
+								<form:input path="email" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
 									<form:errors path="email" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Phone Number</label>
-								<form:input path="SDT" type="text" class="form-control"
-									placeholder="Type Phone Number" />
+								<label class="font-weight-bold">Số Điện Thoại</label>
+								<form:input path="sdt" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="SDT" />
+									<form:errors path="sdt" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Identity Card</label>
-								<form:input path="CMND" type="text" class="form-control"
-									placeholder="Type Identity Card" />
+								<label class="font-weight-bold">CMND</label>
+								<form:input path="cmnd" type="text" class="form-control"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="CMND" />
+									<form:errors path="cmnd" />
 								</p>
 							</div>
 							<div class='parent' class="col-md-4">
 								<hr>
 								<div class='child float-left-child' style="margin-left: 2.5em">
 									<button name="${btnStatus}" type="submit"
-										class="btn btn-danger">Save</button>
+										class="btn btn-danger">Lưu</button>
 								</div>
 								<div>
 									<p5 class="text-success">${message1}</p5>
@@ -435,55 +426,55 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Employee ID</th>
-											<th>Username</th>
-											<th>FirstName</th>
+											<th>Mã Nhân Viên</th>
+											<th>Tên Đăng Nhập</th>
+											<th>Họ và Tên Đệm</th>
 											<th>LastName</th>
-											<th>Date of Birth</th>
-											<th>Address</th>
-											<th>Sex</th>
+											<th>Ngày Sinh</th>
+											<th>Địa Chỉ</th>
+											<th>Giới Tính</th>
 											<th>Email</th>
-											<th>Phone Number</th>
-											<th>Identity Card</th>
-											<th>Edit</th>
-											<th>Delete</th>
+											<th>Số Điện Thoại</th>
+											<th>CMND</th>
+											<th>Sửa</th>
+											<th>Xóa</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Employee ID</th>
+											<th>Mã Nhân Viên</th>
 											<th>Username</th>
-											<th>FirstName</th>
+											<th>Họ và Tên Đệm</th>
 											<th>LastName</th>
-											<th>Date of Birth</th>
-											<th>Address</th>
-											<th>Sex</th>
+											<th>Ngày Sinh</th>
+											<th>Địa Chỉ</th>
+											<th>Giới Tính</th>
 											<th>Email</th>
-											<th>Phone Number</th>
-											<th>Identity Card</th>
-											<th>Edit</th>
-											<th>Delete</th>
+											<th>Số Điện Thoại</th>
+											<th>CMND</th>
+											<th>Sửa</th>
+											<th>Xóa</th>
 										</tr>
 									</tfoot>
 									<tbody>
 										<c:forEach var="nv" items="${nvs}">
 											<tr>
-												<td>${nv.maNV}</td>
+												<td>${nv.manv}</td>
 												<td>${nv.taikhoan.getUsername()}</td>
 												<td>${nv.ho}</td>
 												<td>${nv.ten}</td>
-												<td>${nv.ngaySinh}</td>
-												<td>${nv.diaChi}</td>
-												<td>${nv.gioiTinh}</td>
+												<td>${nv.ngaysinh}</td>
+												<td>${nv.diachi}</td>
+												<td>${nv.gioitinh}</td>
 												<td>${nv.email}</td>
-												<td>${nv.SDT}</td>
-												<td>${nv.CMND}</td>
+												<td>${nv.sdt}</td>
+												<td>${nv.cmnd}</td>
 												<td><a
-													href="/CoffeeHouse/manager/employee/edit/${nv.maNV}.htm?linkEdit"
+													href="/CoffeeHouse/manager/employee/edit/${nv.manv}.htm?linkEdit"
 													rel="stylesheet"><img width="31" height="31"
 														src="<c:url value='/resources/img/edit.png'/>" /></a></td>
 												<td><a name="btnDelete"
-													href="/CoffeeHouse/manager/employee/edit/${nv.maNV}.htm?linkDelete"
+													href="/CoffeeHouse/manager/employee/edit/${nv.manv}.htm?linkDelete"
 													rel="stylesheet" role="button"><img width="31"
 														height="31"
 														src="<c:url value='/resources/img/delete.png'/>" /></a>

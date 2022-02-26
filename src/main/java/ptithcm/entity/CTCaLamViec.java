@@ -2,6 +2,7 @@ package ptithcm.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,8 @@ public class CTCaLamViec {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	@NotBlank(message = "Cannot be blank")
-	private Integer Id;
+	@Column(name = "Id")
+	private Integer id;
 	
 	@ManyToOne
 	@JoinColumn(name="MaNV")
@@ -32,15 +34,8 @@ public class CTCaLamViec {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 //	@NotBlank(message = "Cannot be blank")
-	private Date Ngay;
-
-	public Integer getId() {
-		return Id;
-	}
-
-	public void setId(Integer id) {
-		Id = id;
-	}
+	@Column(name = "Ngay")
+	private Date ngay;
 
 	public NhanVien getCtcalamviec_nhanvien() {
 		return ctcalamviec_nhanvien;
@@ -58,13 +53,20 @@ public class CTCaLamViec {
 		this.ctcalamviec_calamviec = ctcalamviec_calamviec;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public Date getNgay() {
-		return Ngay;
+		return ngay;
 	}
 
 	public void setNgay(Date ngay) {
-		Ngay = ngay;
+		this.ngay = ngay;
 	}
-
 	
 }

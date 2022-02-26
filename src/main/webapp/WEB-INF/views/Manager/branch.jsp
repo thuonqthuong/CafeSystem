@@ -17,7 +17,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Tables</title>
+<title>quản lý chi nhánh</title>
 
 <!-- Custom fonts for this template -->
 <link
@@ -263,40 +263,40 @@
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
 					<div class="card-header">
 						<label class="font-weight-bold"
-							style="font-size: 20px; color: #800000">MANAGE BRANCHS</label>
+							style="font-size: 20px; color: #800000">QUẢN LÝ CHI NHÁNH</label>
 					</div>
 					<div class="card-header">
 						<form:form class="row g-3" modelAttribute="cn"
 							action="/CoffeeHouse/manager/branch/edit.htm" rel="stylesheet">
 							<div class="col-md-4">
-								<label class="font-weight-bold">Branch ID</label>
-								<form:input path="maDiaDiem" type="text" class="form-control"
-									id="exampleFormControlInput1" placeholder="Type Branch ID" />
+								<label class="font-weight-bold">Mã Chi Nhánh</label>
+								<form:input path="madiadiem" type="text" class="form-control"
+									id="exampleFormControlInput1" />
 								<p style="color: red; font-style: oblique">
-									<form:errors path="maDiaDiem" />
+									<form:errors path="madiadiem" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Status</label>
+								<label class="font-weight-bold">Trạng Thái</label>
 								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="trangThai" type="text" class="form-control"
-									id="exampleFormControlInput1" placeholder="Type Status" />
+								<form:input path="trangthai" type="text" class="form-control"
+									id="exampleFormControlInput1" />
 								<p style="color: red; font-style: oblique">
-									<form:errors path="trangThai" />
+									<form:errors path="trangthai" />
 								</p>
 							</div>
 							<div class="col-md-4">
-								<label class="font-weight-bold">Location</label>
-								<form:input path="viTri" type="text" class="form-control"
-									id="exampleFormControlInput1" placeholder="Type Location" />
+								<label class="font-weight-bold">Địa Điểm</label>
+								<form:input path="vitri" type="text" class="form-control"
+									id="exampleFormControlInput1"/>
 								<p style="color: red; font-style: oblique">
-									<form:errors path="viTri" />
+									<form:errors path="vitri" />
 								</p>
 							</div>
 							<div class='parent' class="col-md-4">
 								<hr>
 								<div class='child float-left-child' style="margin-left: 2.5em">
-									<button name="${btnStatus}" class="btn btn-danger">Save</button>
+									<button name="${btnStatus}" class="btn btn-danger">Lưu</button>
 									<p5 class="text-success">${message1}</p5>
 									<p5 class="text-danger">${message0}</p5>
 								</div>
@@ -315,34 +315,34 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Branch ID</th>
-											<th>Status</th>
-											<th>Location</th>
-											<th>Edit</th>
-											<th>Delete</th>
+											<th>Mã Chi Nhánh</th>
+											<th>Trạng Thái</th>
+											<th>Địa Điểm</th>
+											<th>Sửa</th>
+											<th>Xóa</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Branch ID</th>
-											<th>Status</th>
-											<th>Location</th>
-											<th>Edit</th>
-											<th>Delete</th>
+											<th>Mã Chi Nhánh</th>
+											<th>Trạng Thái</th>
+											<th>Địa Điểm</th>
+											<th>Sửa</th>
+											<th>Xóa</th>
 										</tr>
 									</tfoot>
 									<tbody>
 										<c:forEach var="cn" items="${cns}">
 											<tr>
-												<td>${cn.maDiaDiem}</td>
-												<td>${cn.trangThai}</td>
-												<td>${cn.viTri}</td>
+												<td>${cn.madiadiem}</td>
+												<td>${cn.trangthai}</td>
+												<td>${cn.vitri}</td>
 												<td><a
-													href="/CoffeeHouse/manager/branch/edit/${cn.maDiaDiem}.htm?linkEdit"
+													href="/CoffeeHouse/manager/branch/edit/${cn.madiadiem}.htm?linkEdit"
 													rel="stylesheet"><img width="31"
 														height="31" src="<c:url value='/resources/img/edit.png'/>" /></a></td>
 												<td><a name="btnDelete"
-													href="/CoffeeHouse/manager/branch/edit/${cn.maDiaDiem}.htm?linkDelete"
+													href="/CoffeeHouse/manager/branch/edit/${cn.madiadiem}.htm?linkDelete"
 													rel="stylesheet" role="button"><img width="31"
 														height="31"
 														src="<c:url value='/resources/img/delete.png'/>" /></a>

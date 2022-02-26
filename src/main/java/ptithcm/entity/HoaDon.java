@@ -2,6 +2,7 @@ package ptithcm.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,8 @@ public class HoaDon {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	@NotBlank(message = "Cannot be blank")
-	private Integer MaHoaDon;
+	@Column(name = "MaHoaDon")
+	private Integer mahoadon;
 	
 	@ManyToOne
 	@JoinColumn(name="MaNV")
@@ -28,18 +30,12 @@ public class HoaDon {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 //	@NotBlank(message = "Cannot be blank")
-	private Date NgayLap;
+	@Column(name = "NgayLap")
+	private Date ngaylap;
 	
 //	@NotBlank(message = "Cannot be blank")
-	private Double TongTien;
-
-	public Integer getMaHoaDon() {
-		return MaHoaDon;
-	}
-
-	public void setMaHoaDon(Integer maHoaDon) {
-		MaHoaDon = maHoaDon;
-	}
+	@Column(name = "TongTien")
+	private Double tongtien;
 
 	public NhanVien getHoadon_nhanvien() {
 		return hoadon_nhanvien;
@@ -49,21 +45,28 @@ public class HoaDon {
 		this.hoadon_nhanvien = hoadon_nhanvien;
 	}
 
-	public Date getNgayLap() {
-		return NgayLap;
+	public Integer getMahoadon() {
+		return mahoadon;
 	}
 
-	public void setNgayLap(Date ngayLap) {
-		NgayLap = ngayLap;
+	public void setMahoadon(Integer mahoadon) {
+		this.mahoadon = mahoadon;
 	}
 
-	public Double getTongTien() {
-		return TongTien;
+	public Date getNgaylap() {
+		return ngaylap;
 	}
 
-	public void setTongTien(Double tongTien) {
-		TongTien = tongTien;
+	public void setNgaylap(Date ngaylap) {
+		this.ngaylap = ngaylap;
 	}
 
-	
+	public Double getTongtien() {
+		return tongtien;
+	}
+
+	public void setTongtien(Double tongtien) {
+		this.tongtien = tongtien;
+	}
+
 }

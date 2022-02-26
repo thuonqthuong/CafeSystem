@@ -17,7 +17,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>quản lý nguyên liệu</title>
+<title>chi tiết nhập nguyên liệu</title>
 
 <!-- Custom fonts for this template -->
 <link
@@ -44,7 +44,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@ include file="/WEB-INF/common/Manager/Sidebar.jsp" %>
+		<%@ include file="/WEB-INF/common/Manager/Sidebar.jsp"%>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -234,17 +234,17 @@
 									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
 								</a> <a class="dropdown-item" href="#"> <i
 									class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-									Settings
+									Cài đặt
 								</a> <a class="dropdown-item" href="#"> <i
 									class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-									Activity Log
+									Lịch sử hoạt động
 								</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item"
 									href="http://localhost:8080/CoffeeHouse/login/logout.htm"
 									data-toggle="modal" data-target="#logoutModal"> <i
 									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-									Logout
+									Đăng xuất
 								</a>
 							</div></li>
 
@@ -263,75 +263,8 @@
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
 					<div class="card-header">
 						<label class="font-weight-bold"
-							style="font-size: 20px; color: #800000">QUẢN LÝ NGUYÊN LIỆU</label>
-					</div>
-					<div class="card-header">
-						<form:form class="row g-3" modelAttribute="nl"
-							action="/CoffeeHouse/manager/material/edit.htm" rel="stylesheet">
-							<div class="col-md-4">
-								<label class="font-weight-bold">Mã Nguyên Liệu</label>
-								<form:input path="manguyenlieu" type="text" class="form-control"
-									id="exampleFormControlInput1"/>
-								<p style="color: red; font-style: oblique">
-									<form:errors path="manguyenlieu" />
-								</p>
-							</div>
-							<%-- <div class="col-md-4">
-								<label class="font-weight-bold">Unit</label>
-								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="nguyenlieu_donvi" type="text"
-									class="form-control" id="exampleFormControlInput1"
-									placeholder="Type Unit" />
-								<p style="color: red; font-style: oblique">
-									<form:errors path="nguyenlieu_donvi" />
-								</p>
-							</div> --%>
-							<div class="col-md-4">
-								<label class="font-weight-bold">Đơn Vị</label>
-								<form:select path="nguyenlieu_donvi.madonvi" items="${units}"
-									itemValue="madonvi" itemLabel="tendonvi" class="form-control"
-									aria-label=".form-select-lg example">
-								</form:select>
-							</div>
-							<div class="col-md-4">
-								<label class="font-weight-bold">Tên Nguyên Liệu</label>
-								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="tennguyenlieu" type="text"
-									class="form-control" id="exampleFormControlInput1"/>
-								<p style="color: red; font-style: oblique">
-									<form:errors path="tennguyenlieu" />
-								</p>
-							</div>
-							<div class="col-md-4">
-								<label class="font-weight-bold">Số Lượng</label>
-								<form:input path="soluong" type="text" class="form-control"
-									id="exampleFormControlInput1"/>
-								<p style="color: red; font-style: oblique">
-									<form:errors path="soluong" />
-								</p>
-							</div>
-							<div class="col-md-4">
-								<label class="font-weight-bold">Ghi Chú</label>
-								<form:input path="ghichu" type="text" class="form-control"
-									id="exampleFormControlInput1"/>
-								<p style="color: red; font-style: oblique">
-									<form:errors path="ghichu" />
-								</p>
-							</div>
-
-							<div class='parent' class="col-md-4">
-								<hr>
-								<div class='child float-left-child' style="margin-left: 2.5em">
-									<button name="${btnStatus}" class="btn btn-danger">Lưu</button>
-									<p5 class="text-success">${message1}</p5>
-									<p5 class="text-danger">${message0}</p5>
-								</div>
-							</div>
-							<div class="form-inline col-5">
-								<hr>
-								<span id="result1"></span>
-							</div>
-						</form:form>
+							style="font-size: 20px; color: #800000">CHI TIẾT NHẬP
+							NGUYÊN LIỆU</label>
 					</div>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -341,43 +274,39 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Mã Nguyên Liệu</th>
-											<th>Đơn Vị</th>
-											<th>Tên Nguyên Liệu</th>
-											<th>Tồn Kho</th>
-											<th>Ghi Chú</th>
-											<th>Sửa</th>
-											<th>Xóa</th>
+											<th>Mã phiếu nhập</th>
+											<th>Tên Nhân Viên</th>
+											<th>Vị Trí</th>
+											<th>Ngày Giờ</th>
+											<th>Nguyên liệu</th>
+											<th>Đơn vị</th>
+											<th>Số lượng</th>
+											<th>Đơn giá</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Mã Nguyên Liệu</th>
-											<th>Đơn Vị</th>
-											<th>Tên Nguyên Liệu</th>
-											<th>Tồn Kho</th>
-											<th>Ghi Chú</th>
-											<th>Sửa</th>
-											<th>Xóa</th>
+											<th>Mã phiếu nhập</th>
+											<th>Tên Nhân Viên</th>
+											<th>Vị Trí</th>
+											<th>Ngày Giờ</th>
+											<th>Nguyên liệu</th>
+											<th>Đơn vị</th>
+											<th>Số lượng</th>
+											<th>Đơn giá</th>
 										</tr>
 									</tfoot>
 									<tbody>
-										<c:forEach var="nl" items="${nls}">
+										<c:forEach var="ctpn" items="${ctpns}">
 											<tr>
-												<td>${nl.manguyenlieu}</td>
-												<td>${nl.nguyenlieu_donvi.getMadonvi()}</td>
-												<td>${nl.tennguyenlieu}</td>
-												<td>${nl.soluong}</td>
-												<td>${nl.ghichu}</td>
-												<td><a
-													href="/CoffeeHouse/manager/material/edit/${nl.manguyenlieu}.htm?linkEdit"
-													rel="stylesheet"><img width="31"
-														height="31" src="<c:url value='/resources/img/edit.png'/>" /></a></td>
-												<td><a name="btnDelete"
-													href="/CoffeeHouse/manager/material/edit/${nl.manguyenlieu}.htm?linkDelete"
-													rel="stylesheet" role="button"><img width="31"
-														height="31"
-														src="<c:url value='/resources/img/delete.png'/>" /></a>
+												<td>${ctpn.phieunhap.maphieunhap}</td>
+												<td>${ctpn.phieunhap.phieunhap_nhanvien.ten}</td>
+												<td>${ctpn.phieunhap.phieunhap_diadiem.vitri}</td>
+												<td>${ctpn.phieunhap.ngaygio}</td>
+												<td>${ctpn.ctphieunhap_nguyenlieu.manguyenlieu}</td>
+												<td>${ctpn.ctphieunhap_donvi.madonvi}</td>
+												<td>${ctpn.soluong}</td>
+												<td>${ctpn.dongia}</td>
 											</tr>
 										</c:forEach>
 									</tbody>

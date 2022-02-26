@@ -22,24 +22,22 @@ import ptithcm.entity.TaiKhoan;
 @Transactional
 @RequestMapping("/manager/employee")
 public class EplyController {
-	private String s="btnAdd";
-	
-	//----------------------------KHỞI ĐẦU----------------------------
+	@Autowired
+	SessionFactory factory;
+	private String s = "btnAdd";
+	private String ma;
+//	List<TaiKhoan> listht = null;
+
+	// ----------------------------KHỞI ĐẦU----------------------------
 	@RequestMapping("")
 	public String employee(ModelMap model) {
-		System.out.println("Khong lam gi ca");
 		List<NhanVien> DS = this.getNhanViens();
-		s="btnAdd";
+		s = "btnAdd";
 		model.addAttribute("btnStatus", "btnAdd");
 		model.addAttribute("nv", new NhanVien());
 		model.addAttribute("nvs", DS);
 		return "Manager/employee";
 	}
-
-	private String ma;
-
-	@Autowired
-	SessionFactory factory;
 
 	public List<NhanVien> getNhanViens() {
 		Session session = factory.getCurrentSession();
@@ -48,7 +46,8 @@ public class EplyController {
 		List<NhanVien> list = query.list();
 		return list;
 	}
-	//----------------------------THÊM----------------------------
+
+	// ----------------------------THÊM----------------------------
 	public int insertNhanVien(NhanVien us) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -56,6 +55,7 @@ public class EplyController {
 			session.save(us);
 			t.commit();
 		} catch (Exception e) {
+			System.out.println("Ex add: " + e);
 			t.rollback();
 			return 0;
 		} finally {
@@ -67,24 +67,24 @@ public class EplyController {
 	@ModelAttribute("accounts")
 	public List<TaiKhoan> getTaiKhoan() {
 		Session session = factory.getCurrentSession();
-		String hql="FROM TaiKhoan A WHERE A.Stts=True";
-		System.out.println("MA: "+ma);
-		if(s=="btnAdd")
-		{
-			hql = "FROM TaiKhoan A WHERE A.Stts=True";
-		}
-		/*
-		 * else if(s=="btnEdit") { hql =
-		 * "FROM TaiKhoan A WHERE A.Username= :ma OR A.Stts=False";
-		 * query.setParameter("ma", ma); }
-		 */
+		String hql = "FROM TaiKhoan A WHERE A.stts=True";
+		System.out.println("MA HIEN THI: " + ma);
 		Query query = session.createQuery(hql);
+		NhanVien nvtemp = new NhanVien();
+		if (s == "btnAdd") {
+			hql = "FROM TaiKhoan A WHERE A.stts=True";
+		}
+		else if (s == "btnEdit") {
+			hql = "FROM TaiKhoan A WHERE A.stts=False";
+			nvtemp = get1NhanVien(ma);
+			System.out.println(nvtemp.getTaikhoan().getUsername());
+		}
 		List<TaiKhoan> list = query.list();
 		return list;
 	}
 
 	@RequestMapping(value = "/edit", params = "btnAdd")
-	public String addUser(ModelMap model, @ModelAttribute("nv") NhanVien nv) {
+	public String addUser(ModelMap model, @ModelAttribute("nv") NhanVien nv/* , @PathVariable("maNV") String maNV */) {
 		System.out.println("btnAdd");
 		int check = this.insertNhanVien(nv);
 		if (check != 0) {
@@ -95,11 +95,12 @@ public class EplyController {
 		}
 		List<NhanVien> DS = this.getNhanViens();
 		model.addAttribute("nvs", DS);
-		s="btnAdd";
+		s = "btnAdd";
 		model.addAttribute("btnStatus", "btnAdd");
 		return "Manager/employee";
 	}
-	//----------------------------SỬA----------------------------
+
+	// ----------------------------SỬA----------------------------
 	public int updateUser(NhanVien user) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -107,6 +108,7 @@ public class EplyController {
 			session.update(user);
 			t.commit();
 		} catch (Exception e) {
+			System.out.println("Ex update: " + e);
 			t.rollback();
 			return 0;
 		} finally {
@@ -118,16 +120,16 @@ public class EplyController {
 	@RequestMapping(value = "/edit", params = "btnEdit")
 	public String edit_User(ModelMap model, @ModelAttribute("nv") NhanVien nv) {
 		System.out.println("btnEdit");
-		nv.setMaNV(ma);
+		nv.setManv(ma);
 		int check = this.updateUser(nv);
 		if (check != 0) {
 			model.addAttribute("message1", "Edit success!");
-			s="btnAdd";
+			s = "btnAdd";
 			model.addAttribute("btnStatus", "btnAdd");
 			model.addAttribute("nv", new NhanVien());
 		} else {
 			model.addAttribute("message0", "Edit fail!");
-			s="btnEdit";
+			s = "btnEdit";
 			model.addAttribute("btnStatus", "btnEdit");
 		}
 		List<NhanVien> DS = this.getNhanViens();
@@ -136,28 +138,35 @@ public class EplyController {
 		return "Manager/employee";
 	}
 
-	public NhanVien get1NhanVien(String ma) {
+	public NhanVien get1NhanVien(String manv) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM NhanVien where maNV = :ma";
+		String hql = "FROM NhanVien where manv = :manv";
 		Query query = session.createQuery(hql);
-		query.setParameter("ma", ma);
+		query.setParameter("manv", manv);
 		NhanVien list = (NhanVien) query.list().get(0);
 		return list;
 	}
 
-	@RequestMapping(value = "/edit/{maNV}.htm", params = "linkEdit")
-	public String editUser(ModelMap model, @ModelAttribute("nv") NhanVien nv, @PathVariable("maNV") String maNV) {
+	@RequestMapping(value = "/edit/{manv}.htm", params = "linkEdit")
+	public String editUser(ModelMap model, @ModelAttribute("nv") NhanVien nv, @PathVariable("manv") String maNV) {
 		System.out.println("linkEdit");
+		
+		NhanVien nvtemp = new NhanVien();
+		nvtemp = get1NhanVien(maNV);
+		System.out.println(nvtemp.getTaikhoan().getUsername());
+//		listht.add(nvtemp.getTaikhoan());
+		
 		List<NhanVien> DS = this.getNhanViens();
 		model.addAttribute("nvs", DS);
 		ma = maNV;
-		s="btnEdit";
+		s = "btnEdit";
 		model.addAttribute("btnStatus", "btnEdit");
 		model.addAttribute("nv", this.get1NhanVien(ma));
-		
+
 		return "Manager/employee";
 	}
-	//----------------------------XÓA----------------------------
+
+	// ----------------------------XÓA----------------------------
 	public int deleteNhanVien(NhanVien us) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -165,6 +174,7 @@ public class EplyController {
 			session.delete(us);
 			t.commit();
 		} catch (Exception e) {
+			System.out.println("Ex deleteL: " + e);
 			t.rollback();
 			return 0;
 		} finally {
@@ -172,13 +182,23 @@ public class EplyController {
 		}
 		return 1;
 	}
-
-	@RequestMapping(value = "/edit/{maNV}.htm", params = "linkDelete")
-	public String delete(ModelMap model, @ModelAttribute("nv") NhanVien nv/* , @PathVariable("maNV") String maNV */) {
+	
+	@RequestMapping(value = "/edit/{manv}.htm", params = "linkDelete")
+	public String delete(ModelMap model, @ModelAttribute("nv") NhanVien nv, @PathVariable("manv") String maNV) {
 		System.out.println("linkDelete");
+		
+		NhanVien nvtemp = new NhanVien();
+		nvtemp = get1NhanVien(maNV);
+		System.out.println(nvtemp.getTen());
+		
 		int check = this.deleteNhanVien(nv);
 		if (check != 0) {
 			model.addAttribute("message1", "Delete success");
+			
+			Session session = factory.getCurrentSession();
+			nvtemp.getTaikhoan().setStts(true);
+			session.update(nvtemp);
+
 		} else {
 			model.addAttribute("message0", "Delete fail");
 		}
