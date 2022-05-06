@@ -1,7 +1,9 @@
 package ptithcm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -15,7 +17,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ptithcm.entity.CTCaLamViec;
+import ptithcm.entity.CaLamViec;
 import ptithcm.entity.DiaDiem;
+import ptithcm.entity.NguyenLieu;
+import ptithcm.entity.NhanVien;
+import ptithcm.entity.PhieuNhap;
 
 @Controller
 @Transactional
@@ -23,6 +30,7 @@ import ptithcm.entity.DiaDiem;
 public class BrnchController {
 	@Autowired
 	SessionFactory factory;
+	public static NhanVien nvt = new NhanVien();
 	private String ma;
 	
 	//----------------------------KHỞI ĐẦU----------------------------
@@ -159,5 +167,70 @@ public class BrnchController {
 
 		return "Manager/branch";
 	}
-
+	@RequestMapping("shifts")
+	public String product(ModelMap model, @ModelAttribute("nhanviennhap") NhanVien nv) {
+		String tdn = LoginController.tendn;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM NhanVien where username = :usn";
+		Query query = session.createQuery(hql);
+		query.setParameter("usn", tdn);
+		List<NhanVien> lst = query.list();
+		nvt = lst.get(0);
+		model.addAttribute("nhanviennhap", lst.get(0));
+		model.addAttribute("clv", new DiaDiem());
+//		model.addAttribute("clv", new CTCaLamViec());
+		model.addAttribute("nhanvien", new NhanVien());
+		model.addAttribute("chinhanh", new DiaDiem());
+		//
+		model.addAttribute("chonnhanvien", new NhanVien());
+		return "Staff/shifts";
+	}
+	
+	@ModelAttribute("cnselect")
+	public List<DiaDiem> getDiaDiem() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM DiaDiem WHERE trangthai = true";
+		Query query = session.createQuery(hql);
+		List<DiaDiem> list = query.list();
+		return list;
+	}
+	
+	@ModelAttribute("nvselect")
+	public List<NhanVien> getNhanVien() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM NhanVien";
+		Query query = session.createQuery(hql);
+		List<NhanVien> list = query.list();
+		return list;
+	}
+	
+	@RequestMapping(value = "shifts", params="XacNhanCN")
+	public String DiaDiem(ModelMap model, @ModelAttribute("madiadiem") String madiadiem) {
+		DiaDiem chinhanh = new DiaDiem();
+		System.out.println(madiadiem);
+		Session session = factory.getCurrentSession();
+		String hql = "FROM DiaDiem WHERE madiadiem = madiadiem";
+		Query query = session.createQuery(hql);
+		chinhanh = (DiaDiem) query.list().get(0);
+		model.addAttribute("nhanviennhap", nvt);
+		//Hiển thị giờ làm việc tương ứng
+		Session session1 = factory.getCurrentSession();
+		String hql1 = "SELECT U FROM CaLamViec U";
+		Query query1 = session1.createQuery(hql1);
+		List<CaLamViec> DS = query1.list();
+		List<CaLamViec> DSCLV = new ArrayList<>();;
+		for(CaLamViec i: DS) {
+			if((i.getCalamviec_diadiem().getMadiadiem()).equals(madiadiem)) {
+				DSCLV.add(i);
+			}
+		}
+		model.addAttribute("clvs", DSCLV);
+		model.addAttribute("clv", new DiaDiem());
+//		model.addAttribute("clv", new CTCaLamViec());
+		model.addAttribute("chinhanh", new DiaDiem());
+		model.addAttribute("nhanvien", new NhanVien());
+		//cmt
+		model.addAttribute("chonnhanvien", new NhanVien());
+		return "Staff/shifts";
+	}
 }

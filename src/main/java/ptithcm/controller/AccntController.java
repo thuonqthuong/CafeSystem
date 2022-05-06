@@ -14,6 +14,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ptithcm.entity.NhanVien;
 import ptithcm.entity.Quyen;
 import ptithcm.entity.TaiKhoan;
 
@@ -33,15 +35,6 @@ public class AccntController {
 		List<TaiKhoan> list = query.list();
 		return list;
 	}
-	
-	@RequestMapping("")
-	public String branch(ModelMap model) {
-		model.addAttribute("btnStatus", "btnAdd");
-		List<TaiKhoan> DS = this.getTaiKhoans();
-		model.addAttribute("tk", new TaiKhoan());
-		model.addAttribute("tks", DS);
-		return "Manager/account";
-	}
 	@ModelAttribute("aus")
 	public List<Quyen> getQuyen() {
 		Session session = factory.getCurrentSession();
@@ -49,6 +42,16 @@ public class AccntController {
 		Query query = session.createQuery(hql);
 		List<Quyen> list = query.list();
 		return list;
+	}
+
+	@RequestMapping("")
+	public String product(ModelMap model) {
+		System.out.println("No mapping");
+		model.addAttribute("btnStatus", "btnAdd");
+		List<TaiKhoan> DS = this.getTaiKhoans();
+		model.addAttribute("tk", new TaiKhoan());
+		model.addAttribute("tks", DS);
+		return "Manager/account";
 	}
 	//----------------------------XÓA----------------------------
 	public int deleteTaiKhoan(TaiKhoan tk) {
@@ -68,7 +71,7 @@ public class AccntController {
 	}
 
 	@RequestMapping(value = "/edit/{username}.htm", params = "linkDelete")
-	public String delete(ModelMap model, @ModelAttribute("tk") TaiKhoan tk, @PathVariable("username") String username) {
+	public String delete(ModelMap model, @ModelAttribute("tk") TaiKhoan tk) {
 		System.out.print("linkDelete");
 		int check = this.deleteTaiKhoan(tk);
 		if (check != 0) {

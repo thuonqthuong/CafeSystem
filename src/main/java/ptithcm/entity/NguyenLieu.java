@@ -28,8 +28,8 @@ public class NguyenLieu {
 	private String tennguyenlieu;
 	
 //	@NotBlank(message = "Cannot be blank")
-	@Column(name = "Soluong")
-	private Float soluong;
+	@Column(name = "SoLuong")
+	private int soluong;
 	
 	@Column(name = "GhiChu")
 	private String ghichu;
@@ -72,11 +72,11 @@ public class NguyenLieu {
 		this.tennguyenlieu = tennguyenlieu;
 	}
 
-	public Float getSoluong() {
+	public int getSoluong() {
 		return soluong;
 	}
 
-	public void setSoluong(Float soluong) {
+	public void setSoluong(int soluong) {
 		this.soluong = soluong;
 	}
 

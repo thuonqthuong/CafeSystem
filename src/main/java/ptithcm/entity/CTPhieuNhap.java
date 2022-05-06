@@ -15,61 +15,72 @@ public class CTPhieuNhap {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private Integer id;
-	
+	private int id;
+
 	@ManyToOne
-	@JoinColumn(name="maNguyenLieu")
+	@JoinColumn(name = "MaNguyenLieu")
 	NguyenLieu ctphieunhap_nguyenlieu;
-	
+
 	@ManyToOne
-	@JoinColumn(name="MaPhieuNhap")
+	@JoinColumn(name = "MaPhieuNhap")
 	PhieuNhap phieunhap;
-	
+
 	@ManyToOne
-	@JoinColumn(name="maDonVi")
+	@JoinColumn(name = "MaDonVi")
 	DonVi ctphieunhap_donvi;
-	
+
 	@Column(name = "SoLuong")
-	private Float soluong;
-	
+	private float soluong;
+
 	@Column(name = "DonGia")
-	private Double dongia;
+	private double dongia;
 	
 	public NguyenLieu getCtphieunhap_nguyenlieu() {
 		return ctphieunhap_nguyenlieu;
 	}
+
 	public void setCtphieunhap_nguyenlieu(NguyenLieu ctphieunhap_nguyenlieu) {
 		this.ctphieunhap_nguyenlieu = ctphieunhap_nguyenlieu;
 	}
+
 	public PhieuNhap getPhieunhap() {
 		return phieunhap;
 	}
+
 	public void setPhieunhap(PhieuNhap phieunhap) {
 		this.phieunhap = phieunhap;
 	}
+
 	public DonVi getCtphieunhap_donvi() {
 		return ctphieunhap_donvi;
 	}
+
 	public void setCtphieunhap_donvi(DonVi ctphieunhap_donvi) {
 		this.ctphieunhap_donvi = ctphieunhap_donvi;
 	}
-	public Integer getId() {
+
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+
+	public void setId(int id) {
 		this.id = id;
 	}
-	public Float getSoluong() {
+
+	public float getSoluong() {
 		return soluong;
 	}
-	public void setSoluong(Float soluong) {
+
+	public void setSoluong(float soluong) {
 		this.soluong = soluong;
 	}
-	public Double getDongia() {
+
+	public double getDongia() {
 		return dongia;
 	}
-	public void setDongia(Double dongia) {
+
+	public void setDongia(double dongia) {
 		this.dongia = dongia;
 	}
-	
+
 }

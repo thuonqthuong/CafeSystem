@@ -220,12 +220,13 @@
 
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow"><a
-							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							class="nav-link dropdown-toggle"
+							href="${root}/resources/Manager/#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
 								class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas
 									McGee</span> <img class="img-profile rounded-circle"
-								src="img/undraw_profile.svg">
+								src="${root}/resources/Manager/img/undraw_profile.svg">
 						</a> <!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -268,7 +269,7 @@
 					<div class="card-header">
 						<form:form class="row g-3" modelAttribute="nl"
 							action="/CoffeeHouse/manager/material/edit.htm" rel="stylesheet">
-							<div class="col-md-4">
+							<%-- <div class="col-md-4">
 								<label class="font-weight-bold">Mã Nguyên Liệu</label>
 								<form:input path="manguyenlieu" type="text" class="form-control"
 									id="exampleFormControlInput1"/>
@@ -276,26 +277,15 @@
 									<form:errors path="manguyenlieu" />
 								</p>
 							</div>
-							<%-- <div class="col-md-4">
-								<label class="font-weight-bold">Unit</label>
-								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="nguyenlieu_donvi" type="text"
-									class="form-control" id="exampleFormControlInput1"
-									placeholder="Type Unit" />
-								<p style="color: red; font-style: oblique">
-									<form:errors path="nguyenlieu_donvi" />
-								</p>
-							</div> --%>
 							<div class="col-md-4">
 								<label class="font-weight-bold">Đơn Vị</label>
-								<form:select path="nguyenlieu_donvi.madonvi" items="${units}"
+								<form:select path="nguyenlieu_donvi.madonvi" items="${donvi}"
 									itemValue="madonvi" itemLabel="tendonvi" class="form-control"
 									aria-label=".form-select-lg example">
 								</form:select>
 							</div>
 							<div class="col-md-4">
 								<label class="font-weight-bold">Tên Nguyên Liệu</label>
-								<!-- taikhoan.getTaikhoan().getUsername() -->
 								<form:input path="tennguyenlieu" type="text"
 									class="form-control" id="exampleFormControlInput1"/>
 								<p style="color: red; font-style: oblique">
@@ -317,7 +307,7 @@
 								<p style="color: red; font-style: oblique">
 									<form:errors path="ghichu" />
 								</p>
-							</div>
+							</div> --%>
 
 							<div class='parent' class="col-md-4">
 								<hr>
@@ -325,6 +315,9 @@
 									<button name="${btnStatus}" class="btn btn-danger">Lưu</button>
 									<p5 class="text-success">${message1}</p5>
 									<p5 class="text-danger">${message0}</p5>
+									<button
+										onclick="location.href='http://localhost:8080/CoffeeHouse/manager/materials.htm'"
+										class="btn btn-success" type="button">Reload</button>
 								</div>
 							</div>
 							<div class="form-inline col-5">

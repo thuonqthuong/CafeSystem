@@ -17,7 +17,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>quản lý chi nhánh</title>
+<title>nhập nguyên liệu</title>
 
 <!-- Custom fonts for this template -->
 <link
@@ -44,7 +44,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@ include file="/WEB-INF/common/Manager/Sidebar.jsp" %>
+		<%@ include file="/WEB-INF/common/Manager/Sidebar.jsp"%>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -262,46 +262,71 @@
                     <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
 					<div class="card-header">
-						<label class="font-weight-bold"
-							style="font-size: 20px; color: #800000">QUẢN LÝ CHI NHÁNH</label>
-					</div>
-					<div class="card-header">
-						<form:form class="row g-3" modelAttribute="cn"
-							action="/CoffeeHouse/manager/branch/edit.htm" rel="stylesheet">
-							<div class="col-md-4">
-								<label class="font-weight-bold">Mã Chi Nhánh</label>
-								<form:input path="madiadiem" type="text" class="form-control"
-									id="exampleFormControlInput1" />
-								<p style="color: red; font-style: oblique">
-									<form:errors path="madiadiem" />
-								</p>
+						<div class="card-header">
+							<label class="font-weight-bold"
+								style="font-size: 20px; color: #800000">NHẬP NGUYÊN LIỆU</label>
+						</div>
+						<form:form class="row g-3" modelAttribute="ctpn"
+							action="/CoffeeHouse/manager/material/importdetails.htm"
+							rel="stylesheet">
+							<div class="col-md-2">
+								<label class="font-weight-bold">Nhân Viên Lập Phiếu</label> <label
+									style="color: black; font-size: 16px; font-weight: bold;"
+									type="text" items="${confirmnhanvien}" class="form-control">${confirmnhanvien.ho}
+									${confirmnhanvien.ten}</label>
 							</div>
-							<div class="col-md-4">
-								<label class="font-weight-bold">Trạng Thái</label>
-								<!-- taikhoan.getTaikhoan().getUsername() -->
-								<form:input path="trangthai" type="text" class="form-control"
-									id="exampleFormControlInput1" />
-								<p style="color: red; font-style: oblique">
-									<form:errors path="trangthai" />
-								</p>
+							<div class="col-md-6">
+								<label class="font-weight-bold">Chi Nhánh Nhập Nguyên
+									Liệu</label> <label
+									style="color: black; font-size: 16px; font-weight: bold;"
+									type="text" items="${confirmchinhanh}" class="form-control">${confirmchinhanh.vitri}</label>
 							</div>
-							<div class="col-md-4">
-								<label class="font-weight-bold">Địa Điểm</label>
-								<form:input path="vitri" type="text" class="form-control"
-									id="exampleFormControlInput1"/>
-								<p style="color: red; font-style: oblique">
-									<form:errors path="vitri" />
-								</p>
+							<div class="col-md-3">
+								<label class="font-weight-bold">Thời Gian Nhập Nguyên
+									Liệu</label> <label
+									style="color: black; font-size: 16px; font-weight: bold;"
+									type="text" items="${confirmthoigian}" class="form-control">${confirmthoigian}</label>
+							</div>
+							<div class="col-md-2">
+								<label class="font-weight-bold">Chọn Nguyên Liệu</label> <br>
+								<select name="nguyenlieu">
+									<c:forEach var="nl" items="${nlselect}">
+										<option class="form-control"
+											aria-label=".form-select-lg example">${nl.tennguyenlieu}</option>
+									</c:forEach>
+								</select>
+							</div>
+
+							<div class="col-md-2">
+								<label class="font-weight-bold">Đơn giá ${dongia}</label> <input
+									items="${editdongia}" name="dongia" type="number" min="0"
+									value="${editdongia}" step="any" class="form-control"
+									id="exampleFormControlInput1" />
+							</div>
+							<div class="col-md-2">
+								<label class="font-weight-bold">Số lượng</label> <input
+									items="${editsoluong}" name="soluong" type="number" min="0"
+									value="${editsoluong}" step="any" class="form-control"
+									id="exampleFormControlInput1" />
+							</div>
+							<div class="col-md-2">
+								<label class="font-weight-bold">Đơn Vị</label> <br> <select
+									name="donvi">
+									<c:forEach var="dv" items="${donvi}">
+										<option class="form-control"
+											aria-label=".form-select-lg example">${dv.tendonvi}</option>
+									</c:forEach>
+								</select>
 							</div>
 							<div class='parent' class="col-md-4">
 								<hr>
 								<div class='child float-left-child' style="margin-left: 2.5em">
-									<button name="${btnStatus}" class="btn btn-danger">Lưu</button>
-									<p5 class="text-success">${message1}</p5>
-									<p5 class="text-danger">${message0}</p5>
+									<button name="${btnStatus}" class="btn btn-danger">Xác
+										Nhận</button>
 									<button
-										onclick="location.href='http://localhost:8080/CoffeeHouse/manager/branch.htm'"
+										onclick="location.href='http://localhost:8080/CoffeeHouse/manager/material/importdetails.htm'"
 										class="btn btn-success" type="button">Reload</button>
 								</div>
 							</div>
@@ -309,44 +334,59 @@
 								<hr>
 								<span id="result1"></span>
 							</div>
+							<br>
 						</form:form>
 					</div>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
+						<br>
+						<div class="div_right" style="margin-left: 2.5em">
+							<button name="btnSave" class="btn btn-danger">
+								<i class="fa fa-save">Lưu</i>
+							</button>
+							<p5 class="text-success">${message1}</p5>
+							<p5 class="text-danger">${message0}</p5>
+							<button name="btnDeleteAll" class="btn btn-danger">
+								<i class="fa fa-trash">Xóa</i>
+							</button>
+						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" width="100%"
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Mã Chi Nhánh</th>
-											<th>Trạng Thái</th>
-											<th>Địa Điểm</th>
+											<th>Nguyên liệu</th>
+											<th>Đơn giá</th>
+											<th>Số lượng</th>
+											<th>Đơn vị</th>
 											<th>Sửa</th>
 											<th>Xóa</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Mã Chi Nhánh</th>
-											<th>Trạng Thái</th>
-											<th>Địa Điểm</th>
+											<th>Nguyên liệu</th>
+											<th>Đơn giá</th>
+											<th>Số lượng</th>
+											<th>Đơn vị</th>
 											<th>Sửa</th>
 											<th>Xóa</th>
 										</tr>
 									</tfoot>
 									<tbody>
-										<c:forEach var="cn" items="${cns}">
+										<c:forEach var="ctpn" items="${ctpns}">
 											<tr>
-												<td>${cn.madiadiem}</td>
-												<td>${cn.trangthai}</td>
-												<td>${cn.vitri}</td>
+												<td>${ctpn.ctphieunhap_nguyenlieu.tennguyenlieu}</td>
+												<td>${ctpn.dongia}</td>
+												<td>${ctpn.soluong}</td>
+												<td>${ctpn.ctphieunhap_donvi.tendonvi}</td>
 												<td><a
-													href="/CoffeeHouse/manager/branch/edit/${cn.madiadiem}.htm?linkEdit"
-													rel="stylesheet"><img width="31"
-														height="31" src="<c:url value='/resources/img/edit.png'/>" /></a></td>
+													href="/CoffeeHouse/manager/material/importdetails/${ctpn.id}.htm?linkEdit"
+													rel="stylesheet"><img width="31" height="31"
+														src="<c:url value='/resources/img/edit.png'/>" /></a></td>
 												<td><a name="btnDelete"
-													href="/CoffeeHouse/manager/branch/edit/${cn.madiadiem}.htm?linkDelete"
+													href="/CoffeeHouse/manager/material/importdetails/${ctpn.id}.htm?linkDelete"
 													rel="stylesheet" role="button"><img width="31"
 														height="31"
 														src="<c:url value='/resources/img/delete.png'/>" /></a>
@@ -357,7 +397,6 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<!-- /.container-fluid -->
 
@@ -429,7 +468,6 @@
 
 	<!-- Page level custom scripts -->
 	<script src="${root}/resources/Manager/js/demo/datatables-demo.js"></script>
-
 </body>
 
 </html>

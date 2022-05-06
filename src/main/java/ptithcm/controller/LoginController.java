@@ -22,6 +22,7 @@ import ptithcm.entity.TaiKhoan;
 @RequestMapping("/login")
 public class LoginController {
 	TaiKhoan taikhoan = new TaiKhoan();
+	public static String tendn;
 	
 	@Autowired
 	SessionFactory factory;
@@ -53,12 +54,16 @@ public class LoginController {
 		}
 		else {
 			taikhoan = list.get(0);
+			tendn = taikhoan.getUsername();
+			String hql1 = "FROM NhanVien where username = :tendn";
+			Query query1 = session.createQuery(hql1);
+			query1.setParameter("tendn", tendn);
+			List<NhanVien> lst = query1.list();
+			String name = lst.get(0).getHo() + " " + lst.get(0).getTen();
+			model.addAttribute("name", name);
 			ss.setAttribute("nhanvien", taikhoan.getUsername());
-			System.out.println("Thông tin nhân viên login: " + taikhoan.getUsername());
 //			ss.setAttribute("dn", taikhoan.getAdmin());
 			if (taikhoan.getQuyen().getMaquyen().equals("QL")){
-//				List<Seed> list1 = getSeed();
-//				model.addAttribute("Seed", list1);
 				return "Manager/Dashboard";
 			}
 			else

@@ -282,12 +282,13 @@
 
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow"><a
-							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							class="nav-link dropdown-toggle"
+							href="${root}/resources/Manager/#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
 								class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas
 									McGee</span> <img class="img-profile rounded-circle"
-								src="img/undraw_profile.svg">
+								src="${root}/resources/Manager/img/undraw_profile.svg">
 						</a> <!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -347,56 +348,56 @@
 							</div>
 							<div class="col-md-4">
 								<label class="font-weight-bold">Họ và Tên Đệm</label>
-								<form:input path="ho" type="text" class="form-control"/>
+								<form:input path="ho" type="text" class="form-control" />
 								<p style="color: red; font-style: oblique">
 									<form:errors path="ho" />
 								</p>
 							</div>
 							<div class="col-md-4">
 								<label class="font-weight-bold">Tên</label>
-								<form:input path="ten" type="text" class="form-control"/>
+								<form:input path="ten" type="text" class="form-control" />
 								<p style="color: red; font-style: oblique">
 									<form:errors path="ten" />
 								</p>
 							</div>
 							<div class="col-md-4">
 								<label class="font-weight-bold">Ngày Sinh</label>
-								<form:input path="ngaysinh" type="text" class="form-control"/>
+								<form:input path="ngaysinh" type="text" class="form-control" />
 								<p style="color: red; font-style: oblique">
 									<form:errors path="ngaysinh" />
 								</p>
 							</div>
 							<div class="col-md-4">
 								<label class="font-weight-bold">Địa Chỉ</label>
-								<form:input path="diachi" type="text" class="form-control"/>
+								<form:input path="diachi" type="text" class="form-control" />
 								<p style="color: red; font-style: oblique">
 									<form:errors path="diachi" />
 								</p>
 							</div>
 							<div class="col-md-4">
 								<label class="font-weight-bold">Giới Tính</label>
-								<form:input path="gioitinh" type="text" class="form-control"/>
+								<form:input path="gioitinh" type="text" class="form-control" />
 								<p style="color: red; font-style: oblique">
 									<form:errors path="gioitinh" />
 								</p>
 							</div>
 							<div class="col-md-4">
 								<label class="font-weight-bold">Email</label>
-								<form:input path="email" type="text" class="form-control"/>
+								<form:input path="email" type="text" class="form-control" />
 								<p style="color: red; font-style: oblique">
 									<form:errors path="email" />
 								</p>
 							</div>
 							<div class="col-md-4">
 								<label class="font-weight-bold">Số Điện Thoại</label>
-								<form:input path="sdt" type="text" class="form-control"/>
-								<p style="color: red; font-style: oblique">
+								<form:input path="sdt" type="text" class="form-control" />
+								<p style="color: red; font-style: oblique"><!-- type="tel" id="tel" name="tel" -->
 									<form:errors path="sdt" />
 								</p>
 							</div>
 							<div class="col-md-4">
 								<label class="font-weight-bold">CMND</label>
-								<form:input path="cmnd" type="text" class="form-control"/>
+								<form:input path="cmnd" type="text" class="form-control" />
 								<p style="color: red; font-style: oblique">
 									<form:errors path="cmnd" />
 								</p>
@@ -404,8 +405,11 @@
 							<div class='parent' class="col-md-4">
 								<hr>
 								<div class='child float-left-child' style="margin-left: 2.5em">
-									<button name="${btnStatus}" type="submit"
+									<button style="margin: 5px;" name="${btnStatus}" type="submit"
 										class="btn btn-danger">Lưu</button>
+									<button
+										onclick="location.href='http://localhost:8080/CoffeeHouse/manager/employee.htm'"
+										class="btn btn-success" type="button">Reload</button>
 								</div>
 								<div>
 									<p5 class="text-success">${message1}</p5>
@@ -457,24 +461,24 @@
 										</tr>
 									</tfoot>
 									<tbody>
-										<c:forEach var="nv" items="${nvs}">
+										<c:forEach var="n" items="${nvs}">
 											<tr>
-												<td>${nv.manv}</td>
-												<td>${nv.taikhoan.getUsername()}</td>
-												<td>${nv.ho}</td>
-												<td>${nv.ten}</td>
-												<td>${nv.ngaysinh}</td>
-												<td>${nv.diachi}</td>
-												<td>${nv.gioitinh}</td>
-												<td>${nv.email}</td>
-												<td>${nv.sdt}</td>
-												<td>${nv.cmnd}</td>
+												<td>${n.manv}</td>
+												<td>${n.taikhoan.getUsername()}</td>
+												<td>${n.ho}</td>
+												<td>${n.ten}</td>
+												<td>${n.ngaysinh}</td>
+												<td>${n.diachi}</td>
+												<td>${n.gioitinh}</td>
+												<td>${n.email}</td>
+												<td>${n.sdt}</td>
+												<td>${n.cmnd}</td>
 												<td><a
-													href="/CoffeeHouse/manager/employee/edit/${nv.manv}.htm?linkEdit"
+													href="/CoffeeHouse/manager/employee/edit/${n.manv}.htm?linkEdit"
 													rel="stylesheet"><img width="31" height="31"
 														src="<c:url value='/resources/img/edit.png'/>" /></a></td>
 												<td><a name="btnDelete"
-													href="/CoffeeHouse/manager/employee/edit/${nv.manv}.htm?linkDelete"
+													href="/CoffeeHouse/manager/employee/edit/${n.manv}.htm?linkDelete"
 													rel="stylesheet" role="button"><img width="31"
 														height="31"
 														src="<c:url value='/resources/img/delete.png'/>" /></a>

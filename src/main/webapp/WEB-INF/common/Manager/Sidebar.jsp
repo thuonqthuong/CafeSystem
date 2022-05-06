@@ -9,10 +9,7 @@
 	<a
 		class="sidebar-brand d-flex align-items-center justify-content-center"
 		href="http://localhost:8080/CoffeeHouse/">
-		<div class="sidebar-brand-icon rotate-n-15">
-			<i class="fab fa-gulp"></i>
-		</div>
-		<div class="sidebar-brand-text mx-3">QUẢN LÝ</div>
+		<div name="${name}">Xin Chào<br>${name}</div>
 	</a>
 
 	<!-- Divider -->
@@ -64,7 +61,7 @@
 			<div class="bg-white py-2 collapse-inner rounded">
 				<a class="collapse-item"
 					href="http://localhost:8080/CoffeeHouse/manager/branch.htm">Địa điểm</a> <a class="collapse-item"
-					href="${root}/resources/Manager/cards.html">Phân công ca làm</a>
+					href="http://localhost:8080/CoffeeHouse/manager/branch/shifts.htm">Phân công ca làm</a>
 			</div>
 		</div></li>
 
@@ -81,7 +78,7 @@
 				<a class="collapse-item" href="${root}/resources/Manager/login.html">Lương nhân viên</a> <a class="collapse-item"
 					href="${root}/resources/Manager/register.html">Bán hàng</a> <a
 					class="collapse-item"
-					href="${root}/resources/Manager/forgot-password.html">Ca làm việc</a>
+					href="http://localhost:8080/CoffeeHouse/manager/branch/shifts.htm">Ca làm việc</a>
 			</div>
 		</div></li>
 

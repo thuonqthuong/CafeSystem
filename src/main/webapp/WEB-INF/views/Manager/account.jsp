@@ -220,12 +220,13 @@
 
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow"><a
-							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							class="nav-link dropdown-toggle"
+							href="${root}/resources/Manager/#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
 								class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas
 									McGee</span> <img class="img-profile rounded-circle"
-								src="img/undraw_profile.svg">
+								src="${root}/resources/Manager/img/undraw_profile.svg">
 						</a> <!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -306,6 +307,9 @@
 									<button name="${btnStatus}" class="btn btn-danger">Lưu</button>
 									<p5 class="text-success">${message1}</p5>
 									<p5 class="text-danger">${message0}</p5>
+									<button
+										onclick="location.href='http://localhost:8080/CoffeeHouse/manager/account.htm'"
+										class="btn btn-success" type="button">Reload</button>
 								</div>
 							</div>
 							<div class="form-inline col-5">
@@ -325,8 +329,8 @@
 											<th>Tên Đăng Nhập</th>
 											<th>Quyền Hạn</th>
 											<th>Mật Khẩu</th>
-											<th>Xóa</th>
 											<th>Sửa</th>
+											<th>Xóa</th>
 										</tr>
 									</thead>
 									<tfoot>
@@ -334,8 +338,8 @@
 											<th>Tên Đăng Nhập</th>
 											<th>Quyền Hạn</th>
 											<th>Mật Khẩu</th>
-											<th>Xóa</th>
 											<th>Sửa</th>
+											<th>Xóa</th>
 										</tr>
 									</tfoot>
 									<tbody>

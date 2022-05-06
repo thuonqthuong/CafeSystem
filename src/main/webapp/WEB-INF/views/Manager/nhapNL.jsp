@@ -220,12 +220,13 @@
 
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow"><a
-							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							class="nav-link dropdown-toggle"
+							href="${root}/resources/Manager/#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
 								class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas
 									McGee</span> <img class="img-profile rounded-circle"
-								src="img/undraw_profile.svg">
+								src="${root}/resources/Manager/img/undraw_profile.svg">
 						</a> <!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -267,96 +268,99 @@
 					</div>
 					<div class="card-header">
 						<form:form class="row g-3" modelAttribute="pn"
-							action="/CoffeeHouse/manager/material/import.htm"
-							rel="stylesheet">
-							<div class="col-md-4">
-								<label class="font-weight-bold">Nhân Viên</label>
-								<form:input path="phieunhap_nhanvien.manv" items="${nhanvien}"
-									value="phieunhap_nhanvien.manv"	label="phieunhap_nhanvien.ten"
-									class="form-control" />
+							action="${root}/manager/material/import.htm" rel="stylesheet">
+							<%-- <div class="col-md-4">
+								<label class="font-weight-bold">Mã Phiếu Nhập</label> <label></label>
+								<form:input path="maphieunhap" type="text" class="form-control"
+									disabled="false" />
 								<p style="color: red; font-style: oblique">
-									<form:errors path="phieunhap_nhanvien.ten" /> 
+									<form:errors path="maphieunhap" />
 								</p>
+							</div> --%>
+							<div class="col-md-4">
+								<label class="font-weight-bold">Nhân Viên</label> <label
+									name="nhanvientemp" type="text" items="${nhanviennhap}"
+									itemValue="manv" itemLabel="manv" class="form-control">${nhanviennhap.ho}
+									${nhanviennhap.ten}</label>
+							</div>
+							<div class="col-md-4">
+								<label class="font-weight-bold">Chọn Chi Nhánh</label>
+								<form:select path="phieunhap_diadiem.madiadiem"
+									items="${cnselect}" itemValue="madiadiem" itemLabel="vitri"
+									class="form-control" aria-label=".form-select-lg example">
+								</form:select>
 							</div>
 							<%-- <div class="col-md-4">
-								<label class="font-weight-bold">Chọn Chi Nhánh</label>
-								<form:select path="phieunhap_diadiem" items="${cnselect}"
-									itemValue="phieunhap_diadiem.maDiaDiem" itemLabel="phieunhap_diadiem.viTri" class="form-control"
-									aria-label=".form-select-lg example">
-								</form:select>
-							</div> --%>
-
-							<div class="col-md-4">
 								<label class="font-weight-bold">Ngày Giờ</label>
 								<form:input path="ngaygio" type="datetime-local"
-									class="form-control" />
-								<p style="color: red; font-style: oblique">
-									<form:errors path="ngaygio" />
-								</p>
-							</div>
-							<div class="form-inline col-5">
+									class="form-control"></form:input>
+
+							</div> --%>
+							<div class='parent' class="col-md-4">
 								<hr>
-								<span id="result1"></span>
-							</div>
+								<div class='child float-left-child' style="margin-left: 2.5em">
+									<button name="${btnStatus}" class="btn btn-danger">Xác Nhận</button>
+									<%-- <p5 class="text-success">${message1}</p5>
+									<p5 class="text-danger">${message0}</p5> --%>
+									<button
+										onclick="location.href='http://localhost:8080/CoffeeHouse/manager/material/import.htm'"
+										class="btn btn-success" type="button">Reload</button>
+
+								</div>
 						</form:form>
 					</div>
-					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0">
-									<thead>
+					<div class="form-inline col-5">
+						<hr>
+						<span id="result1"></span>
+					</div>
+					<%-- </form:form> --%>
+				</div>
+				<!-- DataTales Example -->
+				<div class="card shadow mb-4">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0">
+								<thead>
+									<tr>
+										<th>Vị Trí</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>Vị Trí</th>
+									</tr>
+								</tfoot>
+								<tbody>
+									<c:forEach var="pn" items="${pns}">
 										<tr>
-											<th>Product ID</th>
-											<th>Recipe</th>
-											<th>Product Name</th>
-											<th>Note</th>
-											<th>Edit</th>
-											<th>Delete</th>
+											<td>${pn.phieunhap_diadiem.vitri}</td>
 										</tr>
-									</thead>
-									<tfoot>
-										<tr>
-											<th>Recipe</th>
-											<th>Product Name</th>
-											<th>Note</th>
-											<th>Edit</th>
-											<th>Delete</th>
-										</tr>
-									</tfoot>
-									<tbody>
-										<c:forEach var="pn" items="${pns}">
-											<tr>
-												<td>${pn.phieunhap_nhanvien.ten}</td>
-												<td>${pn.phieunhap_diadiem.vitri}</td>
-												<td>${pn.ngaygio}</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
+									</c:forEach>
+								</tbody>
+							</table>
 						</div>
 					</div>
-
 				</div>
-				<!-- /.container-fluid -->
 
 			</div>
-			<!-- End of Main Content -->
-
-			<!-- Footer -->
-			<footer class="sticky-footer bg-white">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2020</span>
-					</div>
-				</div>
-			</footer>
-			<!-- End of Footer -->
+			<!-- /.container-fluid -->
 
 		</div>
-		<!-- End of Content Wrapper -->
+		<!-- End of Main Content -->
+
+		<!-- Footer -->
+		<footer class="sticky-footer bg-white">
+			<div class="container my-auto">
+				<div class="copyright text-center my-auto">
+					<span>Copyright &copy; Your Website 2020</span>
+				</div>
+			</div>
+		</footer>
+		<!-- End of Footer -->
+
+	</div>
+	<!-- End of Content Wrapper -->
 
 	</div>
 	<!-- End of Page Wrapper -->
@@ -389,7 +393,13 @@
 			</div>
 		</div>
 	</div>
-
+	<script type="text/javascript">
+		function getTime(event) {
+			var time = document.getElementById("time");
+			time.firstChild.nodeValue = event.timeStamp;
+		}
+		document.body.addEventListener("keypress", getTime);
+	</script>
 	<!-- Bootstrap core JavaScript-->
 	<script src="${root}/resources/Manager/vendor/jquery/jquery.min.js"></script>
 	<script

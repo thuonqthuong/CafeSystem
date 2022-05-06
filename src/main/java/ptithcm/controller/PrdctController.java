@@ -44,7 +44,6 @@ public class PrdctController {
 		model.addAttribute("sps", DS);
 		return "Manager/product";
 	}
-
 	// ----------------------------XÓA----------------------------
 	public int deleteSanPham(SanPham sp) {
 		Session session = factory.openSession();

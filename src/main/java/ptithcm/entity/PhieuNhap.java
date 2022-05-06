@@ -1,7 +1,7 @@
 package ptithcm.entity;
 
-import java.util.Date;
-
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,14 +28,16 @@ public class PhieuNhap {
 	NhanVien phieunhap_nhanvien;
 	
 	@ManyToOne
-	@JoinColumn(name="maDiaDiem")
+	@JoinColumn(name="MaDiaDiem")
 	DiaDiem phieunhap_diadiem;
 	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+//	@Temporal(TemporalType.DATE)
+//	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 //	@NotBlank(message = "Cannot be blank")
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@DateTimeFormat(pattern = "HH:mm:ss.SSS dd-MM-yyyy")
 	@Column(name = "NgayGio")
-	private Date ngaygio;
+	private Timestamp ngaygio;
 	
 	public NhanVien getPhieunhap_nhanvien() {
 		return phieunhap_nhanvien;
@@ -61,11 +63,11 @@ public class PhieuNhap {
 		this.maphieunhap = maphieunhap;
 	}
 
-	public Date getNgaygio() {
+	public Timestamp getNgaygio() {
 		return ngaygio;
 	}
 
-	public void setNgaygio(Date ngaygio) {
+	public void setNgaygio(Timestamp ngaygio) {
 		this.ngaygio = ngaygio;
 	}
 

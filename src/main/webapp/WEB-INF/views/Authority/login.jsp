@@ -52,7 +52,7 @@
 					<span class="login100-form-title-1"> Sign In </span>
 				</div>
 
-				<form action="login/logininfo.htm" method="post"
+				<form action="http://localhost:8080/CoffeeHouse/login/logininfo.htm" method="post"
 					class="login100-form validate-form">
 					<div class="wrap-input100 validate-input m-b-26"
 						data-validate="Username is required">
