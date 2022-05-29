@@ -24,13 +24,13 @@ public class CTHoaDon {
 	@ManyToOne
 	@JoinColumn(name="MaHoaDon")
 	HoaDon hoadon;
-	
-	@ManyToOne
-	@JoinColumn(name="MaDonVi")
-	DonVi cthoadon_donvi;
+//	
+//	@ManyToOne
+//	@JoinColumn(name="MaDonVi")
+//	DonVi cthoadon_donvi;
 	
 	@Column(name = "SoLuong")
-	private Float soluong;
+	private int soluong;
 
 	public SanPham getCthoadon_sanpham() {
 		return cthoadon_sanpham;
@@ -48,14 +48,6 @@ public class CTHoaDon {
 		this.hoadon = hoadon;
 	}
 
-	public DonVi getCthoadon_donvi() {
-		return cthoadon_donvi;
-	}
-
-	public void setCthoadon_donvi(DonVi cthoadon_donvi) {
-		this.cthoadon_donvi = cthoadon_donvi;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -64,11 +56,11 @@ public class CTHoaDon {
 		this.id = id;
 	}
 
-	public Float getSoluong() {
+	public int getSoluong() {
 		return soluong;
 	}
 
-	public void setSoluong(Float soluong) {
+	public void setSoluong(int soluong) {
 		this.soluong = soluong;
 	}
 	

@@ -1,53 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <c:set var="root" value="${pageContext.servletContext.contextPath}" />
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.dropbtn {
-	background-color: #04AA6D;
-	color: white;
-	padding: 16px;
-	font-size: 16px;
-	border: none;
-}
-
-.dropdown {
-	position: relative;
-	display: inline-block;
-}
-
-.dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: 	#220000;
-	min-width: 160px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	z-index: 1;
-}
-
-.dropdown-content a {
-	color: black;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
-}
-
-.dropdown-content a:hover {
-	background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-	display: block;
-}
-
-.dropdown:hover .dropbtn {
-	background-color: 	#220000;
+<style type="text/css">
+.float-left {
+	float: left;
+	width: 30px;
+	
 }
 </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script data-require="jquery@3.1.1" data-semver="3.1.1"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="${root}/resources/Staff/style.css" />
+<script src="${root}/resources/Staff/script.js"></script>
 <!-- Mobile Specific Meta -->
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -70,6 +40,35 @@
 <!--
 			CSS
 			============================================= -->
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="resources/assets/css/vendor/bootstrap.min.css">
+<!-- Test -->
+<link rel="stylesheet" href="${root}resources/assets/images/icon.ico">
+<!-- Font Awesome CSS -->
+<link rel="stylesheet"
+	href="${root}resources/assets/css/vendor/font.awesome.min.css">
+<!-- Linear Icons CSS -->
+<link rel="stylesheet"
+	href="${root}resources/assets/css/vendor/linearicons.min.css">
+<!-- Swiper CSS -->
+<link rel="stylesheet"
+	href="${root}resources/assets/css/plugins/swiper-bundle.min.css">
+
+<!-- Animation CSS -->
+<link rel="stylesheet"
+	href="${root}resources/assets/css/plugins/animate.min.css">
+<!-- Jquery ui CSS -->
+<link rel="stylesheet"
+	href="${root}resources/assets/css/plugins/jquery-ui.min.css">
+<!-- Nice Select CSS -->
+<link rel="stylesheet"
+	href="${root}resources/assets/css/plugins/nice-select.min.css">
+<!-- Magnific Popup -->
+<link rel="stylesheet"
+	href="${root}resources/assets/css/plugins/magnific-popup.css">
+<!-- Main Style CSS -->
+<link rel="stylesheet" href="${root}resources/assets/css/style.css">
 <link rel="stylesheet"
 	href="${root}/resources/homepage/css/linearicons.css">
 <link rel="stylesheet"
@@ -93,33 +92,19 @@
 
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
-				<div id="logo">
+				<%-- <div id="logo">
 					<a href="${root}/resources/homepage/index.html"><img
 						src="img/logo.png" alt="" title="" /></a>
-				</div>
+				</div> --%>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li class="menu-active"><a href="#home">Home</a></li>
-						<li><a href="#about">About</a></li>
+						<li class="menu-active"><a href="#home">Trang chủ</a></li>
+						<li><a href="#about">Về Chúng Tôi</a></li>
 						<li><a href="#coffee">Coffee</a></li>
-						<li>
-							<div class="dropdown">
-								<li class="nav-item dropdown no-arrow"><a
-									class="nav-link dropdown-toggle"
-									href="${root}/resources/Manager/#" id="userDropdown"
-									role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"> <img
-										class="img-profile rounded-circle" width="25" height="25"
-										src="${root}/resources/Manager/img/undraw_profile.svg">
-								</a> <!-- Dropdown - User Information -->
-									<div class="dropdown-content">
-										<a href="#">Profile</a> 
-										<a href="#">Activity</a> 
-										<a href="http://localhost:8080/CoffeeHouse/login/logout.htm">Logout</a>
-									</div>
-							</div>
-						</li>
-
+						<li><a href="#coffee">Thông Tin Cá Nhân</a></li>
+						<li><a
+							href="http://localhost:8080/CoffeeHouse/login/logout.htm">Đăng
+								xuất</a></li>
 					</ul>
 				</nav>
 				<!-- #nav-menu-container -->
@@ -135,10 +120,10 @@
 			<div
 				class="row fullscreen d-flex align-items-center justify-content-start">
 				<div class="banner-content col-lg-7">
-					<h6 class="text-white text-uppercase">Now you can feel the
-						Energy</h6>
+					<h6 class="text-white text-uppercase">Hiện tại bạn có thể cảm
+						nhận được nguồn năng lượng của mình</h6>
 					<h1>
-						Start your day with <br> a black Coffee
+						Khởi đầu một ngày <br> với một tách cà phê!
 					</h1>
 				</div>
 			</div>
@@ -158,16 +143,17 @@
 						class="img-fluid" src="img/play-icon.png" alt=""></a>
 				</div>
 				<div class="col-lg-6 video-left">
-					<h6>Live Coffee making process.</h6>
+					<h6>Quy trình pha cà phê</h6>
 					<h1>
-						We Telecast our <br> Coffee Making Live
+						Cảm nhận mùi hương <br> nếm trọn vị ngọt
 					</h1>
 					<p>
-						<span>We are here to listen from you deliver exellence</span>
+						<span>Chúng tôi ở đây để lắng nghe những trải nghiệm của
+							bạn</span>
 					</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod temp or incididunt ut labore et dolore magna
-						aliqua. Ut enim ad minim.</p>
+					<p>Cafe nếu bạn nghĩ không ngon thì nó sẽ rất đắng. Nhưng nếu
+						thả lỏng ra và cảm nhận, sau vị đắng sẽ là vị ngọt nhẹ thoáng qua.
+						Cuộc sống của mỗi người chúng ta cũng giống như vậy!</p>
 					<img class="img-fluid" src="img/signature.png" alt="">
 				</div>
 			</div>
@@ -178,101 +164,65 @@
 	<!-- Start menu Area -->
 	<section class="menu-area section-gap" id="coffee">
 		<div class="container">
-
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="single-menu">
-						<div class="title-div justify-content-between d-flex">
-							<h4>Cappuccino</h4>
-							<p class="price float-right">$49</p>
-						</div>
-						<p>Usage of the Internet is becoming more common due to rapid
-							advance.</p>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-menu">
-						<div class="title-div justify-content-between d-flex">
-							<h4>Americano</h4>
-							<p class="price float-right">$49</p>
-						</div>
-						<p>Usage of the Internet is becoming more common due to rapid
-							advance.</p>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-menu">
-						<div class="title-div justify-content-between d-flex">
-							<h4>Espresso</h4>
-							<p class="price float-right">$49</p>
-						</div>
-						<p>Usage of the Internet is becoming more common due to rapid
-							advance.</p>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-menu">
-						<div class="title-div justify-content-between d-flex">
-							<h4>Macchiato</h4>
-							<p class="price float-right">$49</p>
-						</div>
-						<p>Usage of the Internet is becoming more common due to rapid
-							advance.</p>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-menu">
-						<div class="title-div justify-content-between d-flex">
-							<h4>Mocha</h4>
-							<p class="price float-right">$49</p>
-						</div>
-						<p>Usage of the Internet is becoming more common due to rapid
-							advance.</p>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-menu">
-						<div class="title-div justify-content-between d-flex">
-							<h4>Coffee Latte</h4>
-							<p class="price float-right">$49</p>
-						</div>
-						<p>Usage of the Internet is becoming more common due to rapid
-							advance.</p>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-menu">
-						<div class="title-div justify-content-between d-flex">
-							<h4>Piccolo Latte</h4>
-							<p class="price float-right">$49</p>
-						</div>
-						<p>Usage of the Internet is becoming more common due to rapid
-							advance.</p>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-menu">
-						<div class="title-div justify-content-between d-flex">
-							<h4>Ristretto</h4>
-							<p class="price float-right">$49</p>
-						</div>
-						<p>Usage of the Internet is becoming more common due to rapid
-							advance.</p>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-menu">
-						<div class="title-div justify-content-between d-flex">
-							<h4>Affogato</h4>
-							<p class="price float-right">$49</p>
-						</div>
-						<p>Usage of the Internet is becoming more common due to rapid
-							advance.</p>
-					</div>
+			<div class="row d-flex justify-content-center">
+				<div class="title text-center">
+					<h1 class="mb-10">Hãy chọn cho mình hương vị cà phê tuyệt vời
+						nhất!</h1>
 				</div>
 			</div>
+			<br>
+			<div class="row" style="float: right;">
+				<button class="btn btn-outline-warning" name="btnBuyNow"
+					style="margin-left: 50px" items="${soluongsp}">Mua ngay
+					(${soluongsp})</button>
+			</div>
+			<br> <br> <br>
+			<form:form action="/CoffeeHouse/login/logininfo.htm" rel="stylesheet"
+				modelAttribute="themgiohang" items="${cart}">
+				<div class="row">
+					<c:forEach var="prd" items="${products}" varStatus="status">
+						<div class="col-lg-4">
+							<div class="single-menu">
+								<div class="title-div justify-content-between d-flex">
+									<h4>${prd.tensanpham}</h4>
+									<c:out value="${price[status.index]}" />
+								</div>
+								<div class="product-content">
+									<div class="product-title">
+										<%-- <h4 class="title-2">
+											<a
+												href="http://localhost:8080/CoffeeHouse/cart/insert/${prd.masanpham}.htm">${flo.f1.name}</a>
+										</h4> --%>
+									</div>
+									<c:if test="${userLogin==null}">
+										<a style="color: #861F09;"
+											href="http://localhost:8080/CoffeeHouse/login.htm"
+											class="btn product-cart">Mua món này</a>
+									</c:if>
+									<c:if test="${userLogin!=null}">
+										<a style="color: #800000; font-weight: bold;"
+											href="http://localhost:8080/CoffeeHouse/cart/insert/${prd.masanpham}.htm"
+											class="btn product-cart">Mua món này</a>
+									</c:if>
+								</div>
+								<hr>
+								<c:if test="${soluong>0}">
+									<button class="btn btn-outline-warning" name="btnCart"
+										style="margin-right: 100px">Thêm vào giỏ hàng</button>
+								</c:if>
+								<c:if test="${soluong<=0}">
+									<div>Hết hàng</div>
+								</c:if>
+							</div>
+						</div>
+					</c:forEach>
+
+					<%-- </c:forEach> --%>
+				</div>
+			</form:form>
 		</div>
 	</section>
+
 	<!-- End menu Area -->
 
 	<!-- Start gallery Area -->
@@ -401,5 +351,44 @@
 	<script src="${root}/resources/homepage/js/jquery.counterup.min.js"></script>
 	<script src="${root}/resources/homepage/js/mail-script.js"></script>
 	<script src="${root}/resources/homepage/js/main.js"></script>
+	<!-- Modernizer JS -->
+	<script src="${root}/resources/assets/js/vendor/modernizr-3.7.1.min.js"></script>
+	<!-- jQuery JS -->
+	<script src="${root}/resources/assets/js/vendor/jquery-3.5.1.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script
+		src="${root}/resources/assets/js/vendor/bootstrap.bundle.min.js"></script>
+
+	<!-- Swiper Slider JS -->
+	<script src="${root}/resources/assets/js/plugins/swiper-bundle.min.js"></script>
+	<!-- nice select JS -->
+	<script src="${root}/resources/assets/js/plugins/nice-select.min.js"></script>
+	<!-- Ajaxchimpt js -->
+	<script
+		src="${root}/resources/assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+	<!-- Jquery Ui js -->
+	<script src="${root}/resources/assets/js/plugins/jquery-ui.min.js"></script>
+	<!-- Jquery Countdown js -->
+	<script
+		src="${root}/resources/assets/js/plugins/jquery.countdown.min.js"></script>
+	<!-- jquery magnific popup js -->
+	<script
+		src="${root}/resources/assets/js/plugins/jquery.magnific-popup.min.js"></script>
+
+	<!-- Main JS -->
+	<script src="${root}/resources/assets/js/main.js"></script>
+
+	<script>
+		// Get all <li>
+		var lis = document.getElementById('navbar_main').querySelectorAll(
+				'li a');
+		/*  lis.forEach((item, index) => {
+		 	
+		 	item.className += " active";
+		     console.log({ index, item })
+		   }); */
+		var item = lis[1];
+		item.className += " active";
+	</script>
 </body>
 </html>

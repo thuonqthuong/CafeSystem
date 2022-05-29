@@ -31,9 +31,9 @@
 		<%@ include file="/WEB-INF/common/Manager/Sidebar.jsp"%>
 
 		<div class="card-header">
-			<form:form class="row g-3" modelAttribute="clv"
+			<form:form class="row" modelAttribute="clv"
 				action="${root}/manager/branch/shifts.htm" rel="stylesheet">
-				<div class="col-md-2">
+				<div class="col-md-6">
 					<label class="font-weight-bold"
 						style="color: darkblue; font-size: 18px; font-weight: bold;">Tên
 						Quản Lý: </label> <label
@@ -42,26 +42,78 @@
 						itemValue="manv" itemLabel="manv" class="form-control">${nhanviennhap.ho}
 						${nhanviennhap.ten}</label>
 				</div>
-				<div class="col-md-6">
-					<label class="font-weight-bold"
-						style="color: darkblue; font-size: 18px; font-weight: bold;">Chọn
-						Chi Nhánh</label>
-					<form:select path="madiadiem" items="${cnselect}"
-						itemValue="madiadiem" itemLabel="vitri" class="form-control"
-						aria-label=".form-select-lg example">
-					</form:select>
-				</div>
-				<div class='parent' class="col-md-2">
-					<hr>
-					<div class='child float-left-child' style="margin-left: 2.5em">
-						<button name="XacNhanCN" class="btn btn-danger">Chọn</button>
-						<button
-							onclick="location.href='http://localhost:8080/CoffeeHouse/manager/branch/shifts.htm'"
-							class="btn btn-success" type="button">Reload</button>
-
+				<form:form modelAttribute="nhanvien"
+					action="${root}/manager/branch/shifts.htm" rel="stylesheet">
+					<div class="col-md-8">
+						<div class="col-md-6">
+							<label class="font-weight-bold"
+								style="color: darkblue; font-size: 18px; font-weight: bold;">Chọn
+								Nhân Viên: </label>
+							<form:select path="manv" items="${nvselect}" itemValue="manv"
+								itemLabel="ten" class="form-control"
+								aria-label=".form-select-lg example">
+							</form:select>
+						</div>
 					</div>
-				</div>
-				<div class="container">
+					<div class='child float-left-child' style="margin-left: 2.5em">
+						<button name="nhanvienne" class="btn btn-danger">Lưu nhân
+							viên đi!</button>
+					</div>
+				</form:form>
+				<form:form modelAttribute="chinhanh"
+					action="${root}/manager/branch/shifts.htm" rel="stylesheet">
+					<div class="col-md-12">
+						<label class="font-weight-bold"
+							style="color: darkblue; font-size: 18px; font-weight: bold;">Chọn
+							Chi Nhánh</label>
+						<form:select path="madiadiem" items="${cnselect}"
+							itemValue="madiadiem" itemLabel="vitri" class="form-control"
+							aria-label=".form-select-lg example">
+						</form:select>
+					</div>
+					<div class='parent' class="col-md-2">
+						<hr>
+						<div class='child float-left-child' style="margin-left: 2.5em">
+							<button name="XacNhanCN" class="btn btn-danger">Chọn Chi
+								Nhánh</button>
+						</div>
+					</div>
+				</form:form>
+				<form:form commandName="thoigian"
+					action="${root}/manager/branch/shifts.htm" rel="stylesheet">
+					<div class="col-md-4">
+						<label class="font-weight-bold"
+							style="color: darkblue; font-size: 18px; font-weight: bold;">Chọn
+							Thời Gian Làm Việc</label>
+						<form:input path="date" type="date" />
+					</div>
+				</form:form>
+				<form:form modelAttribute="calamviec"
+					action="${root}/manager/branch/shifts.htm" rel="stylesheet">
+					<div class="col-md-4">
+						<label class="font-weight-bold"
+							style="color: darkblue; font-size: 18px; font-weight: bold;">Chọn
+							Ca Làm Việc</label>
+						<form:select path="maca" items="${clvs}" itemValue="maca"
+							itemLabel="giobatdau" class="form-control"
+							aria-label=".form-select-lg example">
+						</form:select>
+					</div>
+					<div class='parent' class="col-md-2">
+						<hr>
+						<div class='child float-left-child' style="margin-left: 2.5em">
+							<button name="ThemCTCLV" class="btn btn-danger">Lưu Ca
+								Làm Việc</button>
+							<p5 class="text-success">${message1}</p5>
+							<p5 class="text-danger">${message0}</p5>
+							<button
+								onclick="location.href='http://localhost:8080/CoffeeHouse/manager/branch/shifts.htm'"
+								class="btn btn-success" type="button">Reload</button>
+
+						</div>
+					</div>
+				</form:form>
+				<%-- <div class="container">
 					<div class="timetable-img text-center">
 						<img src="img/content/timetable.png" alt="">
 					</div>
@@ -141,21 +193,13 @@
 													aria-label=".form-select-lg example">
 												</form:select>
 												<hr>
-												<!-- <div class='parent' class="col-md-2">
-													<div class='child float-left-child'
-														style="margin-left: 2.5em">
-														<button name="Luu" class="btn btn-danger">Lưu</button>
-													</div>
-												</div> -->
 										</form:form>
 									</tr>
 								</c:forEach>
-
-
 							</tbody>
 						</table>
 					</div>
-				</div>
+				</div> --%>
 			</form:form>
 		</div>
 	</div>

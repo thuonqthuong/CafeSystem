@@ -25,9 +25,9 @@ public class DonVi {
 	
 	@Column(name = "GhiChu")
 	private String ghichu;
-	
-	@OneToMany(mappedBy="cthoadon_donvi", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
-	Collection<CTHoaDon> cthoadon;
+//	
+//	@OneToMany(mappedBy="cthoadon_donvi", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+//	Collection<CTHoaDon> cthoadon;
 	
 	@OneToMany(mappedBy="nguyenlieu_donvi", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<NguyenLieu> nguyenlieu;
@@ -37,10 +37,6 @@ public class DonVi {
 	
 	@OneToMany(mappedBy="ctnguyenlieu_donvi", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	Collection<CTNguyenLieu> ctnguyenlieu;
-	
-	public Collection<CTHoaDon> getCTHoaDons() {
-		return cthoadon;
-	}
 	
 	public Collection<NguyenLieu> getNguyenLieus() {
 		return nguyenlieu;
@@ -76,14 +72,6 @@ public class DonVi {
 
 	public void setGhichu(String ghichu) {
 		this.ghichu = ghichu;
-	}
-
-	public Collection<CTHoaDon> getCthoadon() {
-		return cthoadon;
-	}
-
-	public void setCthoadon(Collection<CTHoaDon> cthoadon) {
-		this.cthoadon = cthoadon;
 	}
 
 	public Collection<NguyenLieu> getNguyenlieu() {

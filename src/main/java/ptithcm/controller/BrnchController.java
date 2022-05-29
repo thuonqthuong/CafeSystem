@@ -1,9 +1,8 @@
 package ptithcm.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -20,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ptithcm.entity.CTCaLamViec;
 import ptithcm.entity.CaLamViec;
 import ptithcm.entity.DiaDiem;
-import ptithcm.entity.NguyenLieu;
 import ptithcm.entity.NhanVien;
-import ptithcm.entity.PhieuNhap;
 
 @Controller
 @Transactional
@@ -31,9 +28,10 @@ public class BrnchController {
 	@Autowired
 	SessionFactory factory;
 	public static NhanVien nvt = new NhanVien();
+	public NhanVien nvtemp = new NhanVien();
 	private String ma;
-	
-	//----------------------------KHỞI ĐẦU----------------------------
+
+	// ----------------------------KHỞI ĐẦU----------------------------
 	public List<DiaDiem> getDiaDiems() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM DiaDiem"; /* as us order by us.idUser desc */
@@ -41,7 +39,7 @@ public class BrnchController {
 		List<DiaDiem> list = query.list();
 		return list;
 	}
-	
+
 	@RequestMapping("")
 	public String branch(ModelMap model) {
 		model.addAttribute("btnStatus", "btnAdd");
@@ -50,8 +48,9 @@ public class BrnchController {
 		model.addAttribute("cns", DS);
 		return "Manager/branch";
 	}
-	//----------------------------XÓA----------------------------
-	public int deleteDiaDiem(DiaDiem cn) {
+
+	// ----------------------------XÓA----------------------------
+	public int delete(Object cn) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -65,15 +64,14 @@ public class BrnchController {
 		}
 		return 1;
 	}
-	
+
 	@RequestMapping(value = "/edit/{madiadiem}.htm", params = "linkDelete")
 	public String delete(ModelMap model, @ModelAttribute("cn") DiaDiem cn) {
 		System.out.print("linkDelete");
-		int check = this.deleteDiaDiem(cn);
+		int check = this.delete(cn);
 		if (check != 0) {
 			model.addAttribute("message1", "Delete success");
-		}
-		else {
+		} else {
 			model.addAttribute("message0", "Delete fail");
 		}
 		List<DiaDiem> DS = this.getDiaDiems();
@@ -81,8 +79,9 @@ public class BrnchController {
 		model.addAttribute("cn", new DiaDiem());
 		return "Manager/branch";
 	}
-	//----------------------------THÊM----------------------------
-	public int insertDiaDiem(DiaDiem cn) {
+
+	// ----------------------------THÊM----------------------------
+	public int insert(Object cn) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -100,7 +99,7 @@ public class BrnchController {
 	@RequestMapping(value = "/edit", params = "btnAdd")
 	public String addUser(ModelMap model, @ModelAttribute("cn") DiaDiem cn) {
 		System.out.println("btnAdd");
-		int check = this.insertDiaDiem(cn);
+		int check = this.insert(cn);
 		if (check != 0) {
 			model.addAttribute("message1", "Add success!");
 			model.addAttribute("cn", new DiaDiem());
@@ -112,7 +111,8 @@ public class BrnchController {
 		model.addAttribute("btnStatus", "btnAdd");
 		return "Manager/branch";
 	}
-	//----------------------------SỬA----------------------------
+
+	// ----------------------------SỬA----------------------------
 	public int updateChiNhanh(DiaDiem cn) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -157,8 +157,8 @@ public class BrnchController {
 	}
 
 	@RequestMapping(value = "/edit/{madiadiem}.htm", params = "linkEdit")
-	public String editUser(ModelMap model, @ModelAttribute("cn") DiaDiem cn, @PathVariable("madiadiem") String maDiaDiem) {
-		System.out.println("linkEdit");
+	public String editChiNhanh(ModelMap model, @ModelAttribute("cn") DiaDiem cn,
+			@PathVariable("madiadiem") String maDiaDiem) {
 		List<DiaDiem> DS = this.getDiaDiems();
 		model.addAttribute("cns", DS);
 		ma = maDiaDiem;
@@ -167,6 +167,7 @@ public class BrnchController {
 
 		return "Manager/branch";
 	}
+
 	@RequestMapping("shifts")
 	public String product(ModelMap model, @ModelAttribute("nhanviennhap") NhanVien nv) {
 		String tdn = LoginController.tendn;
@@ -177,15 +178,17 @@ public class BrnchController {
 		List<NhanVien> lst = query.list();
 		nvt = lst.get(0);
 		model.addAttribute("nhanviennhap", lst.get(0));
-		model.addAttribute("clv", new DiaDiem());
-//		model.addAttribute("clv", new CTCaLamViec());
+//		model.addAttribute("clv", new DiaDiem());
+		model.addAttribute("calamviec", new CaLamViec());
+		model.addAttribute("clv", new CTCaLamViec());
 		model.addAttribute("nhanvien", new NhanVien());
 		model.addAttribute("chinhanh", new DiaDiem());
 		//
 		model.addAttribute("chonnhanvien", new NhanVien());
+		model.addAttribute("thoigian", new Date());
 		return "Staff/shifts";
 	}
-	
+
 	@ModelAttribute("cnselect")
 	public List<DiaDiem> getDiaDiem() {
 		Session session = factory.getCurrentSession();
@@ -194,7 +197,7 @@ public class BrnchController {
 		List<DiaDiem> list = query.list();
 		return list;
 	}
-	
+
 	@ModelAttribute("nvselect")
 	public List<NhanVien> getNhanVien() {
 		Session session = factory.getCurrentSession();
@@ -203,34 +206,81 @@ public class BrnchController {
 		List<NhanVien> list = query.list();
 		return list;
 	}
-	
-	@RequestMapping(value = "shifts", params="XacNhanCN")
-	public String DiaDiem(ModelMap model, @ModelAttribute("madiadiem") String madiadiem) {
+
+	@RequestMapping(value = "shifts", params = "XacNhanCN")
+	public String DiaDiem(ModelMap model, @ModelAttribute("madiadiem") String madiadiem,
+			@ModelAttribute("nhanvien") NhanVien nhanvien) {
 		DiaDiem chinhanh = new DiaDiem();
-		System.out.println(madiadiem);
 		Session session = factory.getCurrentSession();
 		String hql = "FROM DiaDiem WHERE madiadiem = madiadiem";
 		Query query = session.createQuery(hql);
 		chinhanh = (DiaDiem) query.list().get(0);
 		model.addAttribute("nhanviennhap", nvt);
-		//Hiển thị giờ làm việc tương ứng
+		// Hiển thị giờ làm việc tương ứng
 		Session session1 = factory.getCurrentSession();
 		String hql1 = "SELECT U FROM CaLamViec U";
 		Query query1 = session1.createQuery(hql1);
 		List<CaLamViec> DS = query1.list();
-		List<CaLamViec> DSCLV = new ArrayList<>();;
-		for(CaLamViec i: DS) {
-			if((i.getCalamviec_diadiem().getMadiadiem()).equals(madiadiem)) {
+		List<CaLamViec> DSCLV = new ArrayList<>();
+		;
+		for (CaLamViec i : DS) {
+			if ((i.getCalamviec_diadiem().getMadiadiem()).equals(madiadiem)) {
 				DSCLV.add(i);
 			}
 		}
 		model.addAttribute("clvs", DSCLV);
-		model.addAttribute("clv", new DiaDiem());
-//		model.addAttribute("clv", new CTCaLamViec());
+//		model.addAttribute("clv", new DiaDiem());
+		model.addAttribute("calamviec", new CaLamViec());
+		model.addAttribute("clv", new CTCaLamViec());
 		model.addAttribute("chinhanh", new DiaDiem());
 		model.addAttribute("nhanvien", new NhanVien());
-		//cmt
+		// cmt
 		model.addAttribute("chonnhanvien", new NhanVien());
+		model.addAttribute("thoigian", new Date());
+		return "Staff/shifts";
+	}
+
+	@RequestMapping(value = "shifts", params = "ThemCTCLV")
+	public String ThemCTCLV(ModelMap model, @ModelAttribute("clv") CTCaLamViec clv,
+			@ModelAttribute("nhanvien") NhanVien nhanvien, @ModelAttribute("chinhanh") DiaDiem chinhanh,
+			@ModelAttribute("calamviec") CaLamViec calamviec, @ModelAttribute("thoigian") Date thoigian) {
+		System.out.println(thoigian);
+		System.out.println(calamviec.getMaca());
+		System.out.println(nvtemp.getManv());
+		
+		
+		CTCaLamViec in = new CTCaLamViec();
+		in.setCtcalamviec_calamviec(calamviec);
+		in.setCtcalamviec_nhanvien(nvtemp);
+		in.setNgay(thoigian);
+		in.setId(1);
+		
+		int check = this.insert(in);
+		if (check != 0) {
+			model.addAttribute("message1", "Add success!");
+		} else {
+			model.addAttribute("message0", "Add fail!");
+		}
+		
+		model.addAttribute("calamviec", new CaLamViec());
+		model.addAttribute("clv", new CTCaLamViec());
+		model.addAttribute("chinhanh", new DiaDiem());
+		model.addAttribute("nhanvien", new NhanVien());
+		model.addAttribute("chonnhanvien", new NhanVien());
+		model.addAttribute("thoigian", new Date());
+		return "Staff/shifts";
+	}
+	@RequestMapping(value = "shifts", params = "nhanvienne")
+	public String nvsa(ModelMap model, @ModelAttribute("nhanvien") NhanVien nv) {
+		nvtemp = nv;
+		System.out.println("NV nè: "+nvtemp.getManv());
+		System.out.println();
+		model.addAttribute("calamviec", new CaLamViec());
+		model.addAttribute("clv", new CTCaLamViec());
+		model.addAttribute("chinhanh", new DiaDiem());
+		model.addAttribute("nhanvien", new NhanVien());
+		model.addAttribute("chonnhanvien", new NhanVien());
+		model.addAttribute("thoigian", new Date());
 		return "Staff/shifts";
 	}
 }

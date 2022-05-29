@@ -269,7 +269,7 @@
 					<div class="card-header">
 						<form:form class="row g-3" modelAttribute="nl"
 							action="/CoffeeHouse/manager/material/edit.htm" rel="stylesheet">
-							<%-- <div class="col-md-4">
+							<div class="col-md-4">
 								<label class="font-weight-bold">Mã Nguyên Liệu</label>
 								<form:input path="manguyenlieu" type="text" class="form-control"
 									id="exampleFormControlInput1"/>
@@ -307,7 +307,7 @@
 								<p style="color: red; font-style: oblique">
 									<form:errors path="ghichu" />
 								</p>
-							</div> --%>
+							</div>
 
 							<div class='parent' class="col-md-4">
 								<hr>
